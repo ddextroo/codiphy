@@ -2,7 +2,7 @@ import React from "react";
 
 function hero() {
   return (
-    <div className="min-h-screen flex flex-col justify-center">
+    <div className="min-h-full">
       <div className="flex flex-col justify-center items-center">
         <div className="text-xl text-primaryDark font-bold mb-5 text-center">
           Unleash the Power of AI-Generated Programming Quizzes with Codiphy!
