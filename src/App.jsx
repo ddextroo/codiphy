@@ -6,6 +6,7 @@ import Hero from './pages/landing/hero';
 import Objective from './pages/landing/objective';
 import Languages from './pages/landing/languages';
 import Features from './pages/landing/features';
+import Footer from './pages/landing/footer';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
       <Objective/>
       <Languages/>
       <Features/>
+      <Footer/>
     </div>
   );
 }
