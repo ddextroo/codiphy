@@ -12,8 +12,8 @@ dist
 dist-ssr
 *.local
 
-backend/__pycache__
 backend/codiphy_env
+backend/__pycache__
 
 # Editor directories and files
 .vscode/*
