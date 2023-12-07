@@ -7,11 +7,11 @@ function nav() {
   return (
     <div>
       <div className="flex flex-row justify-between space-x-5">
-        <div className="font-bold flex flex-col items-end justify-end">Codiphy</div>
-        <div className="hidden justify-center space-x-5 md:flex md:flex-row items-end">
-          <div className="font-medium cursor-pointer hover:text-colorAccent">About</div>
-          <div className="font-medium cursor-pointer hover:text-colorAccent">Languages</div>
-          <div className="font-medium cursor-pointer hover:text-colorAccent">Features</div>
+        <div className="font-bold">Codiphy</div>
+        <div className="hidden justify-center space-x-5 md:flex md:flex-row">
+          <div className="font-medium cursor-pointer after:hover:bg-red-500">About</div>
+          <div className="font-medium cursor-pointer">Languages</div>
+          <div className="font-medium cursor-pointer">Features</div>
         </div>
         <div>
           <Hamburger
