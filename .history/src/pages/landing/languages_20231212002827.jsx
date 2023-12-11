@@ -6,8 +6,8 @@ import { SiCsharp } from "react-icons/si";
 
 function languages() {
   return (
-    <div className="mt-10 md:min-h-screen lg:mt-0">
-      <div className="mt-10 text-colorAccent font-bold text-1xl md:text-3xl mb-10">
+    <div className="md:min-h-screen mt-10 md:mt-0">
+      <div className="text-colorAccent font-bold text-1xl md:text-3xl mb-10">
         Supported Programming Languages
       </div>
       <div className="grid grid-cols-2 gap-2 md:grid-cols-5 place-items-center">

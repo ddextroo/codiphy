@@ -14,7 +14,7 @@ function objective() {
             Codiphy is your premier destination for enhancing your programming
             skills.
           </div>
-          <div className="h-full grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3 place-items-center">
+          <div className="h-full grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 place-items-center">
             {/* <div className="flex flex-col space-x-10 py-10"> */}
             <div className="rounded-lg h-72 p-5 bg-neutral-50 shadow-xl">
               <div className="flex justify-center">
