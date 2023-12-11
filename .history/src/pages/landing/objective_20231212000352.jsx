@@ -49,11 +49,11 @@ function objective() {
                 </div>
                   Fostering a Thriving Learning Community
                 </div>
-                <p>
+                <div className="whitespace-normal">
                   Cultivate a supportive community where learners can connect,
                   share insights, and collaborate on programming challenges,
                   fostering a culture of growth and knowledge-sharing.
-                </p>
+                </div>
               </div>
             {/* </div> */}
           </div>
