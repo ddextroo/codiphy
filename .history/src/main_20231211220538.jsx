@@ -4,7 +4,6 @@ import App from './App.jsx'
 import Login from './pages/auth/login.jsx'
 import Signup from './pages/auth/signup.jsx'
 import Demo from './pages/quiz/demo/demo.jsx'
-import Error from './Error.jsx'
 import './index.css'
 import {
   createBrowserRouter,
