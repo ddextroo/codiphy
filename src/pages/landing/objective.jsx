@@ -1,4 +1,3 @@
-import React from "react";
 import { RiCodeSSlashFill } from "react-icons/ri";
 import { FaRoad } from "react-icons/fa";
 import { RiSpeakFill } from "react-icons/ri";

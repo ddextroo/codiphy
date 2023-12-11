@@ -1,0 +1,84 @@
+import { useState, useEffect } from "react";
+import Hamburger from "hamburger-react";
+import Logo from "./../../assets/logo.png";
+import { Outlet, Link } from "react-router-dom";
+
+function Nav() {
+  const [isOpen, setOpen] = useState(false);
+
+  const [isSticky, setIsSticky] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setIsSticky(true);
+        console.log(isSticky);
+      } else {
+        setIsSticky(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isSticky]);
+
+  return (
+    <nav
+      className={`sticky top-0 p-3 ${
+        isSticky ? "bg-primaryLight shadow-lg rounded-b-lg" : ""
+      }`}
+    >
+      <div className="flex flex-row justify-between space-x-5 md:px-5 ">
+        <div className="font-bold flex flex-row items-end justify-end gap-3 mt-2 md:mt-0">
+          <img src={Logo} className="w-7 h-7"></img>
+          Codiphy
+        </div>
+        <div className="flex flex-row absolute right-0 md:right-10 md:w-full md:justify-center md:relative ">
+          <div className="">
+            <div className="block right-2 absolute md:hidden">
+              <Hamburger
+                size={20}
+                color="#3a3a3a"
+                toggled={isOpen}
+                toggle={setOpen}
+                easing="ease-in"
+                onToggle={(toggled) => {
+                  if (toggled) {
+                    // open a menu
+                    console.log("open");
+                  } else {
+                    // close a menu
+                    console.log("close");
+                  }
+                }}
+              />
+            </div>
+            <div
+              className={`justify-center flex-col  md:flex md:flex-row md:space-x-5 md:mt-2 md:w-full ${
+                isOpen
+                  ? "space-y-5 md:space-y-0 p-10 bg-primaryLight shadow-lg rounded-b-lg md:p-0 md:bg-opacity-0 md:shadow-transparent"
+                  : "hidden p-0 space-y-0"
+              }`}
+            >
+              <div className="font-semibold cursor-pointer hover:text-colorAccent">
+                <Link to="/hero">About</Link>
+              </div>
+              <div className="font-semibold cursor-pointer hover:text-colorAccent">
+                Languages
+              </div>
+              <div className="font-semibold cursor-pointer hover:text-colorAccent">
+                Features
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Outlet />
+    </nav>
+  );
+}
+
+export default Nav;
