@@ -8,7 +8,7 @@ function objective() {
     <>
       <div>
         <div className="min-h-screen flex flex-col space-y-6 justify-center">
-          <h1 class="text-colorAccent font-bold text-3xl">
+          <h1 className="text-colorAccent font-bold text-3xl">
             Master Programming Skills with Codiphy
           </h1>
           <p className="text-gray text-md font-medium">
