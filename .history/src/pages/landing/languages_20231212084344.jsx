@@ -6,11 +6,11 @@ import { SiCsharp } from "react-icons/si";
 
 function languages() {
   return (
-    <div id="language" className="mt-10 max-h-full md:mt-52 md:h-fit lg:h-screen lg:mt-0">
-      <div className="mt-10 text-colorAccent text-xl font-bold text-center md:text-3xl mb-10">
+    <div className="mt-10 md:min-h-screen lg:mt-0">
+      <div className="mt-10 text-colorAccent font-bold text-1xl md:text-3xl mb-10">
         Supported Programming Languages
       </div>
-      <div className="grid grid-cols-2 gap-2 md:grid-cols-5 place-items-center sm:mx-5">
+      <div className="grid grid-cols-2 gap-2 md:grid-cols-5 place-items-center bg-blue-gray-500">
         <div className="flex flex-row justify-start md:justify-center items-center space-x-2 w-full">
           <RiJavascriptFill size={50} color="gray" />
           <div className="text-lg font-medium md:2xl">Javascript</div>
@@ -30,7 +30,7 @@ function languages() {
           <FaPython size={50} color="gray" />
           <div className="text-lg font-medium md:2xl">Python</div>
         </div>
-        <div className="flex flex-row justify-start md:justify-center items-center space-x-2 w-full ">
+        <div className="flex flex-row justify-start md:justify-center  items-center space-x-2 w-full ">
           <SiCsharp size={50} color="gray" />
           <div className="text-lg font-medium md:2xl">C#</div>
         </div>

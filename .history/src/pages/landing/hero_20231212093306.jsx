@@ -4,7 +4,7 @@ import { TypeAnimation } from "react-type-animation";
 
 function hero() {
   return (
-    <section id="hero">
+    <section id="#hero">
       <div className="flex flex-col justify-end max-h-full md:mt-52 md:h-fit lg:h-screen">
         <div className="flex flex-col justify-center items-center">
           <div className="text-xl text-primaryDark font-bold mb-5 text-center md:text-3xl">

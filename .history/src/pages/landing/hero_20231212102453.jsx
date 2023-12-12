@@ -1,11 +1,12 @@
 import Preview from "./../../assets/hero_preview.png";
 import { Outlet, Link } from "react-router-dom";
 import { TypeAnimation } from "react-type-animation";
+import bgSVG from './../../assets/triangleNegative.svg'
 
 function hero() {
   return (
     <section id="hero">
-      <div className="flex flex-col justify-end max-h-full md:mt-52 md:h-fit lg:h-screen">
+      <div className="flex flex-col justify-end max-h-full md:mt-52 md:h-fit lg:h-screen" style={{ backgroundImage: `url(${bgSVG})` }}>
         <div className="flex flex-col justify-center items-center">
           <div className="text-xl text-primaryDark font-bold mb-5 text-center md:text-3xl">
             Unleash the Power of AI-Generated Programming Quizzes with

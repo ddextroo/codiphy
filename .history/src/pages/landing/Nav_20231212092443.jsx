@@ -33,7 +33,7 @@ function Nav() {
       <div className="flex flex-row justify-between space-x-5 md:px-5 ">
         <div className="font-bold flex flex-row items-end justify-end gap-3 mt-2 md:mt-0">
           <img src={Logo} className="w-7 h-7"></img>
-          <a href="#hero">Codiphy</a>
+          Codiphy
         </div>
         <div className="flex flex-row absolute right-0 md:right-10 md:w-full md:justify-center md:relative ">
           <div className="">

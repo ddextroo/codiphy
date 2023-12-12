@@ -4,18 +4,19 @@ import { RiSpeakFill } from "react-icons/ri";
 
 function objective() {
   return (
-    <section id="objective">
+    <section id="#objective">
       <div>
         <div className="mt-10 max-h-full md:mt-52 md:h-fit lg:h-screen flex flex-col space-y-6 justify-center">
-          <h1 className="text-colorAccent text-xl font-bold text-center md:text-3xl">
+          <h1 className="text-colorAccent font-bold text-1xl md:text-3xl">
             Master Programming Skills with Codiphy
           </h1>
           <div className="text-md text-gray md:text-lg">
             Codiphy is your premier destination for enhancing your programming
             skills.
           </div>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3 place-items-center">
-            <div className="rounded-lg h-96 md:h-72 p-5 bg-neutral-50 shadow-xl">
+          <div className="h-full grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3 place-items-center">
+            {/* <div className="flex flex-col space-x-10 py-10"> */}
+            <div className="rounded-lg h-72 p-5 bg-neutral-50 shadow-xl">
               <div className="flex justify-center">
                 <RiCodeSSlashFill className="w-12 h-12 mb-3 text-colorAccent" />
               </div>
@@ -58,6 +59,7 @@ function objective() {
                 fostering a culture of growth and knowledge-sharing.
               </div>
             </div>
+            {/* </div> */}
           </div>
         </div>
       </div>

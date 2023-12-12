@@ -1,6 +1,7 @@
 import Preview from "./../../assets/hero_preview.png";
 import { Outlet, Link } from "react-router-dom";
 import { TypeAnimation } from "react-type-animation";
+import bgSVG from './../../assets/triangleNegative.svg'
 
 function hero() {
   return (

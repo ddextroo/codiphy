@@ -30,7 +30,7 @@ function languages() {
           <FaPython size={50} color="gray" />
           <div className="text-lg font-medium md:2xl">Python</div>
         </div>
-        <div className="flex flex-row justify-start md:justify-center items-center space-x-2 w-full ">
+        <div className="flex flex-row justify-start md:justify-center  items-center space-x-2 w-96">
           <SiCsharp size={50} color="gray" />
           <div className="text-lg font-medium md:2xl">C#</div>
         </div>

@@ -14,7 +14,7 @@ function objective() {
             Codiphy is your premier destination for enhancing your programming
             skills.
           </div>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3 place-items-center">
+          <div className="h-full grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3 place-items-center">
             <div className="rounded-lg h-96 md:h-72 p-5 bg-neutral-50 shadow-xl">
               <div className="flex justify-center">
                 <RiCodeSSlashFill className="w-12 h-12 mb-3 text-colorAccent" />
