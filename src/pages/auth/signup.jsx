@@ -18,9 +18,13 @@ function Signup() {
     });
   };
 
+  const inputBorderStyle = (value) => {
+    return value ? 'border-black' : 'border-gray';
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
+    //form submission here
     console.log('Form submitted:', formData);
   };
 
@@ -48,7 +52,9 @@ function Signup() {
             <input
               type="text"
               id="fullname"
-              className="border rounded-lg w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+              className={`border rounded-lg w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline ${
+                inputBorderStyle(formData.fullname)
+              }`}
               placeholder="Juan Dela Cruz"
               value={formData.fullname}
               onChange={handleChange}
@@ -63,7 +69,9 @@ function Signup() {
             <input
               type="email"
               id="email"
-              className="border rounded-lg w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+              className={`border rounded-lg w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline ${
+                inputBorderStyle(formData.email)
+              }`}
               placeholder="juandelacruz@example.com"
               value={formData.email}
               onChange={handleChange}
@@ -78,7 +86,9 @@ function Signup() {
             <input
               type="password"
               id="password"
-              className="border rounded-lg w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              className={`border rounded-lg w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline ${
+                inputBorderStyle(formData.password)
+              }`}
               placeholder="********"
               value={formData.password}
               onChange={handleChange}
@@ -96,7 +106,7 @@ function Signup() {
       </div>
 
       {/* Right side */}
-      <div className="flex-1 hidden bg-colorAccent lg:flex md:items-center md:justify-center">
+      <div className="flex-1 hidden lg:flex md:items-center md:justify-center bg-gradient-to-b from-colorAccent to-black">
         <div className="text-center ">
           <Player
             src={signupAnimate}
