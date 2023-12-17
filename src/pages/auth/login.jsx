@@ -6,7 +6,6 @@ import { Outlet, Link } from "react-router-dom";
 
 function Login() {
   const [formData, setFormData] = useState({
-    fullname: '',
     email: '',
     password: '',
   });
@@ -21,6 +20,9 @@ function Login() {
   const inputBorderStyle = (value) => {
     return value ? 'border-black' : 'border-gray';
   };
+  //change
+  //imo buhaton kay i click na ang + sa login kanang stage changes
+  // so staged changes na siya i commit dayn
 
   const handleSubmit = (e) => {
     e.preventDefault();
