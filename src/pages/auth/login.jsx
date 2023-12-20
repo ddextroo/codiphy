@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaGithub } from "react-icons/fa6";
 import { Player } from '@lottiefiles/react-lottie-player';
-import signupAnimate from './../../assets/signup.json'
+import signupAnimate from './../../assets/login.json'
 import { Outlet, Link } from "react-router-dom";
 
 function Login() {
@@ -23,6 +23,8 @@ function Login() {
   //change
   //imo buhaton kay i click na ang + sa login kanang stage changes
   // so staged changes na siya i commit dayn
+  // so mana, i push dayun
+  //icheck nato
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -90,7 +92,7 @@ function Login() {
       </div>
 
       {/* Right side */}
-      <div className="flex-1 hidden bg-colorAccent lg:flex md:items-center md:justify-center">
+      <div className="flex-1 hidden bg-gradient-to-b from-colorAccent to-black lg:flex md:items-center md:justify-center">
         <div className="text-center">
           <Player
             src={signupAnimate}
@@ -98,7 +100,7 @@ function Login() {
             loop
             autoplay
           />
-          <div className="mt-0 text-primaryLight text-2xl font-bold mb-2">Codiphy</div>
+          <div className="mt-10 text-primaryLight text-2xl font-bold mb-2">Codiphy</div>
           <div className="text-primaryLight">Code Made Simple, Now Enhance with AI</div>
         </div>
       </div>
