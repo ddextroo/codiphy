@@ -12,10 +12,6 @@ dist
 dist-ssr
 *.local
 
-backend/__pycache__
-backend/codiphy_env
-backend
-
 .history
 
 # Editor directories and files
