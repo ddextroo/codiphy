@@ -5,9 +5,18 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { ToastContainer, toast } from "react-toastify";
+import Loading from "../../components/loading";
 import "react-toastify/dist/ReactToastify.css";
 
 function ForgotPassword() {
+  const [showLoading, setshowLoading] = useState(false);
+  const openLoading = () => {
+    setshowLoading(true);
+  };
+
+  const closeLoading = () => {
+    setshowLoading(false);
+  };
   const success = () =>
     toast.success("😊 Email verification sent successfully!", {
       position: "bottom-left",
@@ -47,12 +56,14 @@ function ForgotPassword() {
       await sendPasswordResetEmail(auth, email).then(() => {
         console.log("Email to send verification:", email);
         success();
+        closeLoading();
         setTimeout(() => {
           navigate("/login", { replace: true });
         }, 3000);
       });
     } catch (err) {
       failed();
+      closeLoading();
       console.log("Error", err);
     }
   };
@@ -91,6 +102,7 @@ function ForgotPassword() {
           <button
             type="submit"
             className="bg-colorAccent hover:bg-red-900 text-primaryLight font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline w-full"
+            onClick={openLoading}
           >
             Reset Password
           </button>
@@ -133,6 +145,7 @@ function ForgotPassword() {
         pauseOnHover
         theme="colored"
       />
+      {showLoading && <Loading />}
     </div>
   );
 }

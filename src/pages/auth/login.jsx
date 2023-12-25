@@ -9,9 +9,18 @@ import { auth } from "./../../firebase/config";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../routes/mainRoutes";
 import { ToastContainer, toast } from "react-toastify";
+import Loading from "../../components/loading";
 import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
+  const [showLoading, setshowLoading] = useState(false);
+  const openLoading = () => {
+    setshowLoading(true);
+  };
+
+  const closeLoading = () => {
+    setshowLoading(false);
+  };
   const success = () =>
     toast.success("😊 Login successfully!", {
       position: "bottom-left",
@@ -49,11 +58,13 @@ function Login() {
       if (user) {
         const uid = user.uid;
         success();
+        closeLoading();
         setTimeout(() => {
           navigate("/quiz");
         }, 3000);
         console.log("uid", uid);
       } else {
+        closeLoading();
         console.log("user is logged out");
       }
     });
@@ -80,6 +91,7 @@ function Login() {
         // Signed in
         const user = userCredential.user;
         dispatch({ type: "LOGIN", payload: user });
+        closeLoading();
         success();
         setTimeout(() => {
           navigate("/quiz");
@@ -87,6 +99,7 @@ function Login() {
         console.log(user);
       })
       .catch((error) => {
+        closeLoading();
         failed();
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -155,6 +168,7 @@ function Login() {
           <button
             type="submit"
             className="bg-colorAccent hover:bg-red-900 text-primaryLight font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline w-full"
+            onClick={openLoading}
           >
             Login
           </button>
@@ -202,6 +216,7 @@ function Login() {
         pauseOnHover
         theme="colored"
       />
+      {showLoading && <Loading/>}
     </div>
   );
 }

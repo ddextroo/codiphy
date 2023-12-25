@@ -11,9 +11,18 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../routes/mainRoutes";
 import { createUserDocumentEmail } from "../../firebase/createUserDocument";
 import { ToastContainer, toast } from "react-toastify";
+import Loading from "../../components/loading";
 import "react-toastify/dist/ReactToastify.css";
 
 function Signup() {
+  const [showLoading, setshowLoading] = useState(false);
+  const openLoading = () => {
+    setshowLoading(true);
+  };
+
+  const closeLoading = () => {
+    setshowLoading(false);
+  };
   const success = () =>
     toast.success("😊 Login successfully!", {
       position: "bottom-left",
@@ -81,19 +90,21 @@ function Signup() {
       .then(async (userCredential) => {
         const user = userCredential.user;
         console.log(user);
+        closeLoading();
         dispatch({ type: "LOGIN", payload: user });
         await createUserDocumentEmail(
           user,
           formData.username,
           formData.displayName
-        );
-        success();
-        setTimeout(() => {
-          navigate("/quiz");
-        }, 3000);
-      })
-      .catch((error) => {
-        failed();
+          );
+          success();
+          setTimeout(() => {
+            navigate("/quiz");
+          }, 3000);
+        })
+        .catch((error) => {
+          failed();
+          closeLoading();
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
@@ -200,6 +211,7 @@ function Signup() {
           <button
             type="submit"
             className="p-3 bg-colorAccent hover:bg-red-900 text-primaryLight font-semibold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline w-full"
+            onClick={openLoading}
           >
             Create Account
           </button>
@@ -242,6 +254,7 @@ function Signup() {
         pauseOnHover
         theme="colored"
       />
+      {showLoading && <Loading />}
     </div>
   );
 }
