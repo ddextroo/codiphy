@@ -10,8 +10,32 @@ import { Outlet, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../routes/mainRoutes";
 import { createUserDocumentEmail } from "../../firebase/createUserDocument";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Signup() {
+  const success = () =>
+    toast.success("😊 Login successfully!", {
+      position: "bottom-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  const failed = () =>
+    toast.error("😔 Login failed", {
+      position: "bottom-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
   const { dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -33,7 +57,9 @@ function Signup() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
-        navigate("/quiz");
+        setTimeout(() => {
+          navigate("/quiz");
+        }, 3000);
         console.log("uid", uid);
       } else {
         console.log("user is logged out");
@@ -56,10 +82,18 @@ function Signup() {
         const user = userCredential.user;
         console.log(user);
         dispatch({ type: "LOGIN", payload: user });
-        await createUserDocumentEmail(user, formData.username, formData.displayName);
-        navigate("/quiz");
+        await createUserDocumentEmail(
+          user,
+          formData.username,
+          formData.displayName
+        );
+        success();
+        setTimeout(() => {
+          navigate("/quiz");
+        }, 3000);
       })
       .catch((error) => {
+        failed();
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
@@ -196,6 +230,18 @@ function Signup() {
         </div>
       </div>
       <Outlet />
+      <ToastContainer
+        position="bottom-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 }

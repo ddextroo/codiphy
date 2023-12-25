@@ -8,9 +8,33 @@ import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { auth } from "./../../firebase/config";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../routes/mainRoutes";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
+  const success = () =>
+    toast.success("😊 Login successfully!", {
+      position: "bottom-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  const failed = () =>
+    toast.error("😔 Login failed", {
+      position: "bottom-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+
   const navigate = useNavigate();
   const { login } = useLogin();
   const { dispatch } = useContext(AuthContext);
@@ -24,7 +48,10 @@ function Login() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
-        navigate("/quiz");
+        success();
+        setTimeout(() => {
+          navigate("/quiz");
+        }, 3000);
         console.log("uid", uid);
       } else {
         console.log("user is logged out");
@@ -53,10 +80,14 @@ function Login() {
         // Signed in
         const user = userCredential.user;
         dispatch({ type: "LOGIN", payload: user });
-        navigate("/quiz");
+        success();
+        setTimeout(() => {
+          navigate("/quiz");
+        }, 3000);
         console.log(user);
       })
       .catch((error) => {
+        failed();
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
@@ -130,7 +161,7 @@ function Login() {
         </form>
         <div className="w-full max-w-sm flex flex-row justify-end">
           <div className="text-black mt-4 text-sm font-semibold cursor-pointe">
-            Forgot Password?
+            <Link to="/forgotpass">Forgot Password?</Link>
           </div>
         </div>
         <div className="text-gray mt-10 text-sm">
@@ -159,6 +190,18 @@ function Login() {
         </div>
       </div>
       <Outlet />
+      <ToastContainer
+        position="bottom-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 }

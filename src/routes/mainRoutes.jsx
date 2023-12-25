@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./../App.jsx";
 import Login from "./../pages/auth/login.jsx";
 import Signup from "./../pages/auth/signup.jsx";
+import ForgotPass from "./../pages/auth/forgot_password.jsx";
 import Demo from "./../pages/quiz/demo/demo.jsx";
 import Quiz from "./../pages/quiz/home/quiz.jsx";
 import Error from "./../Error.jsx";
@@ -40,6 +41,11 @@ const AppContainer = () => {
     {
       path: "/quiz",
       element: <Quiz />,
+      errorElement: <Error />,
+    },
+    {
+      path: "/forgotpass",
+      element: <ForgotPass />,
       errorElement: <Error />,
     },
   ]);
