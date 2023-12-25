@@ -129,12 +129,12 @@ function Login() {
           </button>
         </form>
         <div className="w-full max-w-sm flex flex-row justify-end">
-          <div className="text-black mt-4 text-sm font-medium cursor-pointe">
+          <div className="text-black mt-4 text-sm font-semibold cursor-pointe">
             Forgot Password?
           </div>
         </div>
         <div className="text-gray mt-10 text-sm">
-          Don't have an account?{" "}
+          Don&#x27;t have an account?&nbsp;&nbsp;
           <span className="text-colorAccent font-bold cursor-pointer">
             <Link to="/signup">Signup here</Link>
           </span>
