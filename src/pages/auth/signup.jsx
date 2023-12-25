@@ -1,19 +1,23 @@
-import { useState, useEffect, useContext } from "react";
-import { FaGithub } from "react-icons/fa6";
+import { useState, useContext, useEffect } from "react";
 import { Player } from "@lottiefiles/react-lottie-player";
 import signupAnimate from "./../../assets/signup.json";
+import { auth } from "./../../firebase/config";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
 import { Outlet, Link } from "react-router-dom";
-import { AuthContext } from "../../main";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../routes/mainRoutes";
+import { createUserDocumentEmail } from "../../firebase/createUserDocument";
 
 function Signup() {
-  const { state, dispatch } = useContext(AuthContext);
-  console.log(state);
-  const [data, setData] = useState({ errorMessage: "", isLoading: false });
+  const { dispatch } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  const { client_id, redirect_uri } = state;
   const [formData, setFormData] = useState({
-    fullname: "",
+    displayName: "",
+    username: "",
     email: "",
     password: "",
   });
@@ -25,57 +29,43 @@ function Signup() {
     });
   };
 
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        navigate("/quiz");
+        console.log("uid", uid);
+      } else {
+        console.log("user is logged out");
+      }
+    });
+  }, [navigate]);
+
   const inputBorderStyle = (value) => {
     return value ? "border-black" : "border-gray";
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    //form submission here
-    console.log("Form submitted:", formData);
-  };
-
-  useEffect(() => {
-    // After requesting Github access, Github redirects back to your app with a code parameter
-    const url = window.location.href;
-    const hasCode = url.includes("?code=");
-
-    // If Github API returns the code parameter
-    if (hasCode) {
-      const newUrl = url.split("?code=");
-      window.history.pushState({}, null, newUrl[0]);
-      setData({ ...data, isLoading: true });
-
-      const requestData = {
-        code: newUrl[1],
-      };
-
-      const proxy_url = state.proxy_url;
-
-      // Use code parameter and other parameters to make POST request to proxy_server
-      fetch(proxy_url, {
-        method: "POST",
-        body: JSON.stringify(requestData),
+    await createUserWithEmailAndPassword(
+      auth,
+      formData.email,
+      formData.password
+    )
+      .then(async (userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        dispatch({ type: "LOGIN", payload: user });
+        await createUserDocumentEmail(user, formData.username, formData.displayName);
+        navigate("/quiz");
       })
-        .then((response) => response.json())
-        .then((data) => {
-          dispatch({
-            type: "LOGIN",
-            payload: { user: data, isLoggedIn: true },
-          });
-        })
-        .catch((error) => {
-          setData({
-            isLoading: false,
-            errorMessage: "Sorry! Login failed",
-          });
-        });
-    }
-  }, [state, dispatch, data]);
-
-  if (state.isLoggedIn) {
-    return <Link to="/quiz" />;
-  }
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        // ..
+      });
+  };
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row font-montserrat">
@@ -83,49 +73,52 @@ function Signup() {
       <div className="flex-1 bg-primaryLight flex flex-col justify-center items-center p-8">
         <div className="text-5xl font-bold mb-4 md:text-5xl">Sign Up</div>
         <div className="text-gray mb-4">Create a Codiphy account</div>
-        <button className="p-3 flex w-full max-w-sm justify-center font-semibold  items-center bg-black text-primaryLight mb-4 rounded-lg ">
-          {data.isLoading ? (
-            <AiOutlineLoading3Quarters
-              size={25}
-              className="animate-spin animate-infinite"
-            />
-          ) : (
-            <>
-              <a
-                className="login-link flex flex-row"
-                href={`https://github.com/login/oauth/authorize?scope=user&client_id=${client_id}&redirect_uri=${redirect_uri}`}
-                onClick={() => {
-                  setData({ ...data, errorMessage: "" });
-                }}
-              >
-                <FaGithub size={25} className="mr-3" />
-                Sign up github
-              </a>
-            </>
-          )}
+        {/* <button className="p-3 flex w-full max-w-sm justify-center font-semibold  items-center bg-black text-primaryLight mb-4 rounded-lg" onClick={login}>
+          <FaGithub size={25} className="mr-3" />
+          Sign up github
         </button>
         <div className="flex flex-row justify-center items-center space-x-3 mb-4  ">
           <div className="w-16 h-0.5 bg-gray rounded-xl"></div>
           <div className="text-gray">or sign up with</div>
           <div className="w-16 h-0.5 bg-gray rounded-xl"></div>
-        </div>
+        </div> */}
         <form onSubmit={handleSubmit} className="w-full max-w-sm">
           {/* Full Name */}
           <div className="mb-4">
             <label
-              htmlFor="fullname"
+              htmlFor="displayName"
               className="text-sm  font-medium mb-2 flex flex-row justify-start"
             >
               Full Name
             </label>
             <input
               type="text"
-              id="fullname"
+              id="displayName"
               className={`border rounded-lg w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline ${inputBorderStyle(
-                formData.fullname
+                formData.displayName
               )}`}
               placeholder="Juan Dela Cruz"
-              value={formData.fullname}
+              value={formData.displayName}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          {/* Username Name */}
+          <div className="mb-4">
+            <label
+              htmlFor="username"
+              className="text-sm  font-medium mb-2 flex flex-row justify-start"
+            >
+              Username
+            </label>
+            <input
+              type="text"
+              id="username"
+              className={`border rounded-lg w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline ${inputBorderStyle(
+                formData.username
+              )}`}
+              placeholder="Juan Dela Cruz"
+              value={formData.username}
               onChange={handleChange}
               required
             />
