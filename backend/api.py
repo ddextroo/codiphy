@@ -28,8 +28,9 @@ def generate_quiz():
         (c) c
         (d) d
         Answer: answer,
-        The answer must be letter only
-        'Output the result in "json" format:\n'
+        The answer must be letter only,
+        'Output the result in plain "json" format:\n'
+        'Only provide the json result, no introduction. Just the plain json format only'
         """
     else:
         query = f"""Generate a quiz about this topic: {topic},
@@ -40,7 +41,8 @@ def generate_quiz():
         Question
         Answer: answer,
         '3. Avoid using the ```{language} ``` code block notation.\n'
-        'Output the result in ".json" format:\n'
+        'Output the result in plain "json" format:\n'
+        'Only provide the json result, no introduction. Just the plain json format only'
         """
 
     response = g4f.ChatCompletion.create(
