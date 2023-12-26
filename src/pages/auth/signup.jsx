@@ -66,6 +66,7 @@ function Signup() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
+        success();
         setTimeout(() => {
           navigate("/quiz");
         }, 3000);
