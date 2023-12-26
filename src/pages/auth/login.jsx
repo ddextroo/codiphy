@@ -110,14 +110,14 @@ function Login() {
     <div className="min-h-screen flex flex-col md:flex-row font-montserrat">
       {/* Left side */}
       <div className="flex-1 bg-primaryLight flex flex-col justify-center items-center p-8">
-        <div className="text-2xl font-bold mb-4 md:text-5xl">Welcome back</div>
+        <div className="text-2xl font-bold mb-4 md:text-5xl">Welcome back!</div>
         <div className="text-gray mb-4">Log in to continue using Codiphy</div>
         <button
           className="p-3 flex w-full max-w-sm justify-center font-semibold  items-center bg-black text-primaryLight mb-4 rounded-lg"
           onClick={login}
         >
           <FaGithub size={25} className="mr-3" />
-          Login with github
+          Continue with github
         </button>
         <div className="flex flex-row justify-center items-center space-x-3 mb-4">
           <div className="w-16 h-0.5 bg-gray rounded-xl"></div>

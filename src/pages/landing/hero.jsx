@@ -32,12 +32,12 @@ function hero() {
             just a platform; it is your secret weapon for programming mastery.
           </div>
           <div className="flex flex-row space-x-3 mt-5 mb-5">
-            <div className="rounded-lg bg-colorAccent text-primaryLight px-5 py-2 font-semibold cursor-pointer">
+            <button className="rounded-lg bg-colorAccent text-primaryLight px-5 py-2 font-semibold cursor-pointer">
               <Link to="/login">Get Started</Link>
-            </div>
-            <div className="rounded-lg bg-primaryLight text-primaryDark border border-solid border-gray px-5 py-2 font-semibold cursor-pointer hover:bg-gray hover:bg-opacity-5 hover:text-primaryDark bg-transparent">
+            </button>
+            <button className="rounded-lg bg-primaryLight text-primaryDark border border-solid border-gray px-5 py-2 font-semibold cursor-pointer hover:bg-gray hover:bg-opacity-5 hover:text-primaryDark bg-transparent">
               <Link to="/demo">Try Demo</Link>
-            </div>
+            </button>
           </div>
           <img src={Preview} className="w-auto h-72"></img>
         </div>

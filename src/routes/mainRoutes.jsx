@@ -4,8 +4,9 @@ import App from "./../App.jsx";
 import Login from "./../pages/auth/login.jsx";
 import Signup from "./../pages/auth/signup.jsx";
 import ForgotPass from "./../pages/auth/forgot_password.jsx";
-import Demo from "./../pages/quiz/demo/demo.jsx";
+import DemoQuiz from "./../pages/quiz/demo/demo.jsx";
 import Quiz from "./../pages/quiz/home/quiz.jsx";
+import StartQuiz from './../pages/quiz/home/start/startQuiz.jsx'
 import Error from "./../Error.jsx";
 import { createContext, useEffect, useReducer } from "react";
 import { authReducer } from "../reducers/authReducer";
@@ -35,7 +36,7 @@ const AppContainer = () => {
     },
     {
       path: "/demo",
-      element: <Demo />,
+      element: <DemoQuiz />,
       errorElement: <Error />,
     },
     {
@@ -46,6 +47,11 @@ const AppContainer = () => {
     {
       path: "/forgotpass",
       element: <ForgotPass />,
+      errorElement: <Error />,
+    },
+    {
+      path: "/start",
+      element: <StartQuiz />,
       errorElement: <Error />,
     },
   ]);
