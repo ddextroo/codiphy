@@ -19,20 +19,20 @@ const Quiz = () => {
   const menuItems = [
     {
       title: "Dashboard",
-      icon: <MdSpaceDashboard size={25} className="ml-2" />,
-      outlineIcon: <MdOutlineDashboard size={25} className="ml-2" />,
+      icon: <MdSpaceDashboard size={20} className="ml-2" />,
+      outlineIcon: <MdOutlineDashboard size={20} className="ml-2" />,
       component: <DashboardComponent />,
     },
     {
       title: "Leaderboards",
-      icon: <MdLeaderboard size={25} className="ml-2" />,
-      outlineIcon: <MdOutlineLeaderboard size={25} className="ml-2" />,
+      icon: <MdLeaderboard size={20} className="ml-2" />,
+      outlineIcon: <MdOutlineLeaderboard size={20} className="ml-2" />,
       component: <LeaderboardComponent />,
     },
     {
       title: "Profile",
-      icon: <FaUser size={25} className="ml-2" />,
-      outlineIcon: <FaRegUser size={25} className="ml-2" />,
+      icon: <FaUser size={20} className="ml-2" />,
+      outlineIcon: <FaRegUser size={20} className="ml-2" />,
       component: <ProfileComponent />,
     },
   ];
@@ -74,7 +74,7 @@ const Quiz = () => {
           {menuItems.map((menu, index) => (
             <li
               key={index}
-              className={`text-primaryLight text-medium text-lg flex items-center gap-x-4 cursor-pointer p-5 hover:bg-colorAccent duration-300 ${
+              className={`text-primaryLight text-medium text-md flex items-center gap-x-4 cursor-pointer p-5 hover:bg-colorAccent duration-300 ${
                 index === selectedItem && "bg-colorAccent"
               }`}
               onClick={() => handleItemClick(index)}
