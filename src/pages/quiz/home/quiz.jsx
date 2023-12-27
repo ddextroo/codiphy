@@ -1,32 +1,101 @@
-import { useContext } from "react";
-import { AuthContext } from "../../../routes/mainRoutes";
-import { useLogout } from "./../../../hooks/useLogout";
-import { Navigate, Link } from "react-router-dom";
-function Quiz() {
-  const { user, authIsReady } = useContext(AuthContext);
-  const { logout } = useLogout();
+import { useState } from "react";
+import { FaArrowLeft } from "react-icons/fa";
+import { MdSpaceDashboard, MdOutlineDashboard } from "react-icons/md";
+import { MdLeaderboard, MdOutlineLeaderboard } from "react-icons/md";
+import { FaUser, FaRegUser } from "react-icons/fa";
+import Dashboard from './../../../components/home/dashboard'
+import Leaderboards from './../../../components/home/leaderboards'
+import Profile from './../../../components/home/profile'
+import logo from "./../../../assets/logo.png";
 
-  return authIsReady ? (
-    <div className="App">
-      {user ? (
-        <div className="flex flex-col">
-          <h1>{user.email}</h1>
-          <h1>{user.displayName}</h1>
-          <h1>{user.reloadUserInfo.screenName}</h1>
-          <button className="btn login-btn" onClick={logout}>
-            Logout
-          </button>
-          <button className="w-32 py-4 bg-green-800 flex flex-row justify-center rounded-xl items-center space-x-3">
-            <Link to="/start">Take quiz</Link>
-          </button>
+const DashboardComponent = () => <Dashboard />;
+const LeaderboardComponent = () => <Leaderboards />;
+const ProfileComponent = () => <Profile />;
+
+const Quiz = () => {
+  const [open, setOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(0);
+
+  const menuItems = [
+    {
+      title: "Dashboard",
+      icon: <MdSpaceDashboard size={25} className="ml-2" />,
+      outlineIcon: <MdOutlineDashboard size={25} className="ml-2" />,
+      component: <DashboardComponent />,
+    },
+    {
+      title: "Leaderboards",
+      icon: <MdLeaderboard size={25} className="ml-2" />,
+      outlineIcon: <MdOutlineLeaderboard size={25} className="ml-2" />,
+      component: <LeaderboardComponent />,
+    },
+    {
+      title: "Profile",
+      icon: <FaUser size={25} className="ml-2" />,
+      outlineIcon: <FaRegUser size={25} className="ml-2" />,
+      component: <ProfileComponent />,
+    },
+  ];
+
+  const handleItemClick = (index) => {
+    setSelectedItem(index);
+  };
+
+  return (
+    <div className="flex">
+      <div
+        className={`${
+          open ? "w-72" : "w-[6rem]"
+        } duration-200 bg-gradient-to-b from-colorAccent to-black  h-screen relative`}
+      >
+        <div
+          className={`absolute cursor-pointer rounded-full -right-4 top-9 border-2 border-colorAccent p-2 -mt-4 bg-primaryLight ${
+            !open && "rotate-180"
+          }`}
+          onClick={() => setOpen(!open)}
+        >
+          <FaArrowLeft size={20} color="red" />
         </div>
-      ) : (
-        <Navigate to="/" />
-      )}
+        <div className="flex flex-row gap-x-4 items-center p-5">
+          <img
+            src={logo}
+            className={` w-10 h-10 duration-300 ${open && "rotate-[360deg]"}`}
+            alt="Logo"
+          />
+          <div
+            className={`text-primaryLight text-3xl font-bold duration-300 ${
+              !open && "scale-0"
+            }`}
+          >
+            Codiphy
+          </div>
+        </div>
+        <ul className="pt-6">
+          {menuItems.map((menu, index) => (
+            <li
+              key={index}
+              className={`text-primaryLight text-medium text-lg flex items-center gap-x-4 cursor-pointer p-5 hover:bg-colorAccent duration-300 ${
+                index === selectedItem && "bg-colorAccent"
+              }`}
+              onClick={() => handleItemClick(index)}
+            >
+              {index === selectedItem ? menu.icon : menu.outlineIcon}
+              <span
+                className={`${
+                  !open && "hidden"
+                } origin-left duration-200 font-medium ml-2`}
+              >
+                {menu.title}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="flex-1">
+        {menuItems[selectedItem].component}
+      </div>
     </div>
-  ) : (
-    <h1>Making your auth ready, please wait for a moment</h1>
   );
-}
+};
 
 export default Quiz;
