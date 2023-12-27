@@ -1,6 +1,6 @@
 // Importing modules
 import "./App.css";
-import Nav from './pages/landing/nav';
+import Nav from "./pages/landing/nav";
 import Hero from "./pages/landing/hero";
 import Objective from "./pages/landing/objective";
 import Languages from "./pages/landing/languages";
@@ -24,6 +24,8 @@ function App() {
       setInit(true);
     });
   }, []);
+
+  
 
   const particlesLoaded = (container) => {
     console.log(container);

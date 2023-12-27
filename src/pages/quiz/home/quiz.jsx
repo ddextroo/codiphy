@@ -42,7 +42,7 @@ const Quiz = () => {
   };
 
   return (
-    <div className="flex">
+    <div className="flex font-montserrat">
       <div
         className={`${
           open ? "w-72" : "w-[6rem]"
