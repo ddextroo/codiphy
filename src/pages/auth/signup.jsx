@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { Player } from "@lottiefiles/react-lottie-player";
 import signupAnimate from "./../../assets/signup.json";
+import { FaGithub } from "react-icons/fa6";
 import { auth } from "./../../firebase/config";
 import {
   createUserWithEmailAndPassword,
@@ -10,6 +11,7 @@ import { Outlet, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../routes/mainRoutes";
 import { createUserDocumentEmail } from "../../firebase/createUserDocument";
+import { useLogin } from "./../../hooks/useLogin";
 import { ToastContainer, toast } from "react-toastify";
 import Loading from "../../components/loading";
 import "react-toastify/dist/ReactToastify.css";
@@ -45,6 +47,7 @@ function Signup() {
       progress: undefined,
       theme: "colored",
     });
+  const { login } = useLogin();
   const { dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -97,15 +100,15 @@ function Signup() {
           user,
           formData.username,
           formData.displayName
-          );
-          success();
-          setTimeout(() => {
-            navigate("/quiz");
-          }, 3000);
-        })
-        .catch((error) => {
-          failed();
-          closeLoading();
+        );
+        success();
+        setTimeout(() => {
+          navigate("/quiz");
+        }, 3000);
+      })
+      .catch((error) => {
+        failed();
+        closeLoading();
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
@@ -119,15 +122,18 @@ function Signup() {
       <div className="flex-1 bg-primaryLight flex flex-col justify-center items-center p-8">
         <div className="text-5xl font-bold mb-4 md:text-5xl">Sign Up</div>
         <div className="text-gray mb-4">Create a Codiphy account</div>
-        {/* <button className="p-3 flex w-full max-w-sm justify-center font-semibold  items-center bg-black text-primaryLight mb-4 rounded-lg" onClick={login}>
+        <button
+          className="p-3 flex w-full max-w-sm justify-center font-semibold  items-center bg-black text-primaryLight mb-4 rounded-lg"
+          onClick={login}
+        >
           <FaGithub size={25} className="mr-3" />
-          Sign up github
+          Continue with github
         </button>
         <div className="flex flex-row justify-center items-center space-x-3 mb-4  ">
           <div className="w-16 h-0.5 bg-gray rounded-xl"></div>
           <div className="text-gray">or sign up with</div>
           <div className="w-16 h-0.5 bg-gray rounded-xl"></div>
-        </div> */}
+        </div>
         <form onSubmit={handleSubmit} className="w-full max-w-sm">
           {/* Full Name */}
           <div className="mb-4">

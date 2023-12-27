@@ -33,18 +33,19 @@ def generate_quiz():
         The answer must be letter only,
         'Output the result in plain "json" format:\n'
         'Only provide the json result, no introduction. Just the plain json format only'
+        Avoid using code block notation.
         """
     else:
-        query = f"""Generate a quiz about this topic: {topic},
+        query = f"""Generate a enumaration quiz about this topic: {topic},
         'Maximum of: ({items}) items,
         'adhere to the following rules:\n'
         '1. The items must be tracing of the sample {language} program
         '2. The format will be 
-        Question
-        Answer: answer,
-        '3. Avoid using the ```{language} ``` code block notation.\n'
+        question: question,
+        code: code,
+        answer: answer, (the answer will be the only output of the program)
         'Output the result in plain "json" format:\n'
-        'Only provide the json result, no introduction. Just the plain json format only'
+        'Only provide the json result, no introduction. Just the plain json format only'    
         """
 
     response = g4f.ChatCompletion.create(

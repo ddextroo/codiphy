@@ -1,6 +1,5 @@
 import { FaArrowRight } from "react-icons/fa";
 import { useState } from "react";
-// import useQuiz from "./../../../hooks/useQuiz";
 const questions = [
   {
     question: "What does HTML stand for?",
@@ -87,18 +86,13 @@ const questions = [
 ];
 
 function DemoQuiz() {
-  // const { response, loading } = useQuiz();
-
+  
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [correctAnswer, setCorrectAnswer] = useState(null);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
-
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // } else {
-  //   console.log(response);
-  // }
+  
+ 
 
   const handleAnswer = (selectedOption) => {
     const correctOption = questions[currentQuestion].correctAnswer;
