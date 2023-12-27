@@ -1,12 +1,14 @@
 import g4f
 from flask import Flask, request, jsonify
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 @app.route("/api/quiz", methods=["POST"])
+@cross_origin()
 def generate_quiz():
     g4f.debug.logging = False  # Enable debug logging
     g4f.debug.check_version = False  # Disable automatic version checking
