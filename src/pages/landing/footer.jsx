@@ -10,7 +10,7 @@ import { useState } from "react";
 function Footer() {
   const [showPrivacy, setshowPrivacy] = useState(false);
   const [showAbout, setshowAbout] = useState(false);
-  const [showContact, setshowContact] = useState(true);
+  const [showContact, setshowContact] = useState(false);
 
   const openPrivacy = () => {
     setshowPrivacy(true);
