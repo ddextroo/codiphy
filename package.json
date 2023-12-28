@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "start-backend": "cd backend && venv\\Scripts\\activate && flask run --no-debugger",
+    "start-backend": "cd backend && venv\\Scripts\\activate && python api.py",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },

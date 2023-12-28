@@ -13,7 +13,7 @@ function StartQuiz() {
   // };
 
   // Example data (replace with your actual data)
-  const topic = "Functions, Filter, and Map";
+  const topic = "Operators and Conditions";
   const language = "Python";
 
   const getTitle = () => {

@@ -4,7 +4,7 @@ from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
+app.config["CORS_HEADERS"] = "Content-Type"
 
 
 @app.route("/api/quiz", methods=["POST"])
@@ -34,6 +34,7 @@ def generate_quiz():
         'Output the result in plain "json" format:\n'
         'Only provide the json result, no introduction. Just the plain json format only'
         Avoid using code block notation.
+        'Avoid using ```json block notation'   
         """
     else:
         query = f"""Generate a enumaration quiz about this topic: {topic},
@@ -41,11 +42,12 @@ def generate_quiz():
         'adhere to the following rules:\n'
         '1. The items must be tracing of the sample {language} program
         '2. The format will be 
-        question: question,
-        code: code,
-        answer: answer, (the answer will be the only output of the program)
+        question: questions about the code,
+        code: code of the problem,
+        answer: output of the program,
         'Output the result in plain "json" format:\n'
-        'Only provide the json result, no introduction. Just the plain json format only'    
+        'Only provide the json result, no introduction. Just the plain json format only' 
+        'Avoid using ```json block notation'   
         """
 
     response = g4f.ChatCompletion.create(

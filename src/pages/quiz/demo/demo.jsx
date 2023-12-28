@@ -120,7 +120,7 @@ function DemoQuiz() {
     <div className="bg-gradient-to-b from-colorAccent to-black font-montserrat">
       <div className="h-full min-h-screen flex flex-col items-center justify-center space-y-4 mx-10 ">
         <div className="font-bold text-xl md:text-3xl text-primaryLight py-11">
-          History Quiz - Very Hard
+          Demo Quiz - Very Hard
         </div>
 
         <div className="font-bold md:text-lg lg:text-xl text-primaryLight">

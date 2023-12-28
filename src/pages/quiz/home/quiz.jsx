@@ -45,7 +45,7 @@ const Quiz = () => {
     <div className="flex font-montserrat">
       <div
         className={`${
-          open ? "w-72" : "w-[6rem]"
+          open ? "w-72" : "w-[5rem]"
         } duration-200 bg-gradient-to-b from-colorAccent to-black  h-screen relative`}
       >
         <div
@@ -63,7 +63,7 @@ const Quiz = () => {
             alt="Logo"
           />
           <div
-            className={`text-primaryLight text-3xl font-bold duration-300 ${
+            className={`text-primaryLight text-2xl font-bold duration-300 ${
               !open && "scale-0"
             }`}
           >

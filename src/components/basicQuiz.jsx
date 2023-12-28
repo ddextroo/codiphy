@@ -22,17 +22,18 @@ const BasicQuiz = ({ title, topic, language }) => {
       try {
         if (!dataFetched && !loading && response && response.response) {
           const parsedData = JSON.parse(response.response);
+          console.log(parsedData);
           setJsonData(parsedData);
-          // console.log(parsedData);
           setDataFetched(true);
         }
       } catch (error) {
+        // Handle error if needed
         // console.error("Error fetching or parsing data:", error);
       }
     };
 
     fetchData();
-  }, [response, loading, dataFetched]);
+  }, [response]); //
 
   if (loading || !jsonData) {
     return (
@@ -46,7 +47,8 @@ const BasicQuiz = ({ title, topic, language }) => {
   }
 
   const handleAnswer = (selectedOption) => {
-    const correctOption = jsonData.quiz[currentQuestion].answer;
+    const correctOption = (jsonData.questions || jsonData.quiz)[currentQuestion]
+      ?.answer;
 
     setSelectedAnswer(selectedOption);
 
@@ -55,7 +57,8 @@ const BasicQuiz = ({ title, topic, language }) => {
     }
   };
 
-  const correctOption = jsonData.quiz[currentQuestion].answer;
+  const correctOption = (jsonData.questions || jsonData.quiz)[currentQuestion]
+    ?.answer;
 
   const handleNextQuestion = () => {
     setSelectedAnswer(null);
@@ -73,15 +76,24 @@ const BasicQuiz = ({ title, topic, language }) => {
         {title}
       </div>
       <div className="font-bold md:text-lg lg:text-xl text-primaryLight">
-        {`Question ${currentQuestion + 1}/${jsonData.quiz.length}`}
+        {currentQuestion && jsonData && (jsonData.questions || jsonData.quiz)
+          ? `Question ${currentQuestion + 1}/${
+              jsonData.questions
+                ? jsonData.questions.length
+                : jsonData.quiz.length
+            }`
+          : "Question 1/?"}
       </div>
       <div className="md:text-lg lg:text-xl text-primaryLight py-11">
-        {jsonData.quiz[currentQuestion].question}
+        {jsonData &&
+          (jsonData.quiz
+            ? jsonData.quiz[currentQuestion]?.question
+            : jsonData.questions?.[currentQuestion]?.question)}
       </div>
       <ul className="list-none p-0">
         {Object.entries(
-          jsonData.quiz[currentQuestion].options ||
-            jsonData.quiz[currentQuestion].choices ||
+          (jsonData.questions || jsonData.quiz)[currentQuestion]?.options ||
+            (jsonData.questions || jsonData.quiz)[currentQuestion]?.choices ||
             {}
         ).map(([optionKey, optionValue]) => (
           <li key={optionKey}>
@@ -101,6 +113,7 @@ const BasicQuiz = ({ title, topic, language }) => {
           </li>
         ))}
       </ul>
+
       <div className="w-full flex flex-row justify-end py-5">
         {selectedAnswer !== null && (
           <button

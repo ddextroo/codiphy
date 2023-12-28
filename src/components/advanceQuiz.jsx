@@ -13,7 +13,6 @@ const BasicQuiz = ({ title, topic, language }) => {
   const [score, setScore] = useState(0);
   const [jsonData, setJsonData] = useState(null);
   const [dataFetched, setDataFetched] = useState(false);
-  const [error, setError] = useState(null);
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
 
   const success = () =>
@@ -43,32 +42,23 @@ const BasicQuiz = ({ title, topic, language }) => {
       try {
         if (!dataFetched && !loading && response && response.response) {
           const parsedData = JSON.parse(response.response);
+          console.log(parsedData);
           setJsonData(parsedData);
           setDataFetched(true);
         }
       } catch (error) {
+        // Handle error if needed
         // console.error("Error fetching or parsing data:", error);
-        // setError(error);
       }
     };
 
     fetchData();
-  }, [response, loading, dataFetched]);
-
-  const handleReload = () => {
-    setDataFetched(false);
-    setError(null);
-  };
+  }, [response]); // Only run when the 'response' changes
 
   if (loading || !jsonData) {
     return (
       <div className="h-full min-h-screen flex flex-col items-center justify-center space-y-4 mx-10 ">
-        <Player
-          src={loadingQuiz}
-          className="player w-96 h-96"
-          loop
-          autoplay
-        />
+        <Player src={loadingQuiz} className="player w-96 h-96" loop autoplay />
         <div className="font-bold text-xl md:text-3xl text-primaryLight py-11">
           Loading...
         </div>
@@ -76,30 +66,15 @@ const BasicQuiz = ({ title, topic, language }) => {
     );
   }
 
-  if (error) {
-    return (
-      <div className="h-full min-h-screen flex flex-col items-center justify-center space-y-4 mx-10 ">
-        <div className="font-bold text-xl md:text-3xl text-primaryLight py-11">
-          Error fetching data. Please try again.
-        </div>
-        <button
-          className="bg-colorAccent text-primaryLight p-2 w-32 rounded-xl font-bold"
-          onClick={handleReload}
-        >
-          Reload
-        </button>
-      </div>
-    );
-  }
-
   const handleAnswer = () => {
-    const correctOption = jsonData.questions[currentQuestion].answer;
+    const correctOption = (jsonData.questions || jsonData.quiz)[currentQuestion]
+      ?.answer;
 
     if (formData.answer === correctOption) {
       setScore(score + 1);
-      setIsAnswerCorrect(true); // Set the state to true if the answer is correct
+      setIsAnswerCorrect(true);
     } else {
-      setIsAnswerCorrect(false); // Set the state to false if the answer is incorrect
+      setIsAnswerCorrect(false);
     }
 
     setSelectedAnswer(formData.answer);
@@ -109,12 +84,13 @@ const BasicQuiz = ({ title, topic, language }) => {
     setSelectedAnswer(null);
     setIsAnswerCorrect(false); // Reset the correct answer state
     const nextQuestion = currentQuestion + 1;
-    if (nextQuestion < jsonData.questions.length) {
+    const length = jsonData.questions
+      ? jsonData.questions.length
+      : jsonData.quiz.length;
+    if (nextQuestion < length) {
       setCurrentQuestion(nextQuestion);
     } else {
-      alert(
-        `Quiz completed! Your score: ${score}/${jsonData.questions.length}`
-      );
+      alert(`Quiz completed! Your score: ${score}/${length}`);
     }
     setFormData({
       answer: "",
@@ -132,19 +108,36 @@ const BasicQuiz = ({ title, topic, language }) => {
     e.preventDefault();
     handleAnswer();
   };
+
   return (
     <div className="h-full min-h-screen flex flex-col items-center justify-center space-y-4 mx-10 ">
       <div className="font-bold text-xl md:text-3xl text-primaryLight py-11">
         {title}
       </div>
       <div className="font-bold md:text-lg lg:text-xl text-primaryLight">
-        {`Question ${currentQuestion + 1}/${jsonData.questions.length}`}
+        {currentQuestion && jsonData && (jsonData.questions || jsonData.quiz)
+          ? `Question ${currentQuestion + 1}/${
+              jsonData.questions
+                ? jsonData.questions.length
+                : jsonData.quiz.length
+            }`
+          : "Question 1/?"}
       </div>
       <div className="md:text-lg lg:text-xl text-primaryLight py-11">
-        {jsonData.questions[currentQuestion].question}
+        {jsonData &&
+          (jsonData.quiz
+            ? jsonData.quiz[currentQuestion]?.question
+            : jsonData.questions?.[currentQuestion]?.question)}
       </div>
-      <SyntaxHighlighter language={language} style={dark} className="select-none">
-        {jsonData.questions[currentQuestion].code}
+      <SyntaxHighlighter
+        language={language}
+        style={dark}
+        className="select-none"
+      >
+        {jsonData &&
+          (jsonData.quiz
+            ? jsonData.quiz[currentQuestion]?.code
+            : jsonData.questions?.[currentQuestion]?.code)}
       </SyntaxHighlighter>
       <div>
         <form onSubmit={handleSubmit} className="w-full">
@@ -170,6 +163,7 @@ const BasicQuiz = ({ title, topic, language }) => {
             type="submit"
             className="bg-colorAccent hover:bg-red-900 text-primaryLight font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline w-full"
             onClick={handleAnswer}
+            disabled={selectedAnswer !== null}
           >
             Submit
           </button>

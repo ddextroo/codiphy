@@ -27,7 +27,7 @@ function Nav() {
 
   return (
     <nav
-      className={`sticky top-0 p-5 ${
+      className={`sticky top-0 p-5 duration-300 ${
         isSticky ? "bg-primaryLight shadow-lg rounded-b-lg" : ""
       }`}
     >
@@ -36,7 +36,7 @@ function Nav() {
           <img src={Logo} className="w-7 h-7"></img>
           <a href="#hero">Codiphy</a>
         </div>
-        <div className="flex flex-row absolute right-0 md:right-10 md:w-full md:justify-center md:relative ">
+        <div className="flex flex-row absolute right-0 md:right-10 md:w-full md:justify-center md:relative duration-300">
           <div className="">
             <div className="block right-2 absolute md:hidden">
               <Hamburger
@@ -57,9 +57,9 @@ function Nav() {
               />
             </div>
             <div
-              className={`justify-center flex-col  md:flex md:flex-row md:space-x-5 md:mt-2 md:w-full ${
+              className={`justify-center flex-col  md:flex md:flex-row md:space-x-5 md:mt-2 md:w-full duration-300 ${
                 isOpen
-                  ? "space-y-5 md:space-y-0 p-10 bg-primaryLight shadow-lg rounded-b-lg md:p-0 md:bg-opacity-0 md:shadow-transparent"
+                  ? "space-y-5 md:space-y-0 p-10 bg-primaryLight shadow-lg rounded-b-lg md:p-0 md:bg-opacity-0 md:shadow-transparent duration-300"
                   : "hidden p-0 space-y-0"
               }`}
             >
