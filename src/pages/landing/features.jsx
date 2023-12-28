@@ -70,7 +70,7 @@ function features() {
                     {menu.description}
                   </div>
                 </div>
-
+{/* dds */}
                 <div className=" h-90 rounded-md md:mt-10  md:mb-10 md:ml-20 md:mr-10 flex items-center justify-center">
                   {menu.image}
                 </div>
