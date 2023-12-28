@@ -5,7 +5,7 @@ import SelectTopic from './../../../../components/SelectTopic'
 
 function StartQuiz() {
   // Assuming you have a state to track the user's choice (basic or advance)
-  const [quizType, setQuizType] = useState("basic"); // Defaulting to basic
+  const [quizType, setQuizType] = useState("advance"); // Defaulting to basic
 
   // Function to handle the user's choice
   // const handleQuizTypeChange = (type) => {
