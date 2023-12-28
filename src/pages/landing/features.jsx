@@ -58,7 +58,7 @@ function features() {
       <h2 className="text-colorAccent mb:mt-3 mb-5 md:text-3xl font-bold">Features</h2>
       <div className="shadow-xl border-gray border-1 py-24 rounded-xl md:mt-10 md:mb-10 md:ml-40 md:mr-40 md:h-90 p-5 flex flex-col items-center">
         {/* parent */}
-        <Splide options={{ rewind: true, lazyLoad: "sequential", autoplay: true, }}>
+        <Splide options={{ type: "loop", lazyLoad: "sequential", autoplay: true, }}>
           {menuItems.map((menu, index) => (
             <SplideSlide>
               <div className="grid grid-cols-2 gap-2 md:grid-cols-2 place-items-center">
@@ -70,7 +70,7 @@ function features() {
                     {menu.description}
                   </div>
                 </div>
-
+{/* dds */}
                 <div className=" h-90 rounded-md md:mt-10  md:mb-10 md:ml-20 md:mr-10 flex items-center justify-center">
                   {menu.image}
                 </div>
