@@ -40,29 +40,27 @@ const About = ({ onClose }) => {
             </div>
             <div className="text-xl font-semibold text-center">Developers</div>
             <div className="grid grid-cols-2 gap-y-20 gap-2 md:grid-cols-3 place-items-center mt-10">
-            <div className="flex flex-col gap-y-6 justify-start md:justify-center items-center space-x-2 w-full">
-            <div className="w-28 h-28 rounded-full bg-colorAccent"></div>
-            <div className="text-lg font-medium md:text-2xl">
-              Dexter G. Inguito
-            </div>
-            <a
-              href="https://dextrolio.netlify.app/"
-              target="_blank" 
-              rel="noopener noreferrer"
-            >
-              <button className="w-32 py-2 text-md md:text-sm rounded-xl font-medium bg-colorAccent text-primaryLight px-5">
-                View profile
-              </button>
-            </a>
-            </div>
-
-
+              <div className="flex flex-col gap-y-6 justify-start md:justify-center items-center space-x-2 w-full">
+                <div className="w-28 h-28 rounded-full bg-colorAccent"></div>
+                <div className="text-lg font-medium md:2xl">
+                  Dexter G. Inguito
+                </div>
+                <a
+                  href="https://dextrolio.netlify.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <button className="w-32 py-2 text-md md:text-sm rounded-xl font-medium bg-colorAccent text-primaryLight px-5">
+                    View profile
+                  </button>
+                </a>
+              </div>
               <div className="flex flex-col gap-y-6 justify-start md:justify-center items-center space-x-2 w-full">
                 <div className=" w-28 h-28 rounded-full bg-colorAccent"></div>
                 <div className="text-lg font-medium md:2xl">Aivy C. Unabia</div>
                 <a
                   href="https://aesthethyve-unabia-portfolio.netlify.app/"
-                  target="_blank" 
+                  target="_blank"
                   rel="noopener noreferrer"
                 >
                   <button className="w-32 py-2 text-md md:text-sm rounded-xl font-medium bg-colorAccent text-primaryLight px-5">
@@ -78,7 +76,7 @@ const About = ({ onClose }) => {
                 </div>
                 <a
                   href="https://piamontejess.github.io/jesselann/?fbclid=IwAR1iZG96rcZ83WmrHdvyhTJZjYl4VcpAcgPMfCdRQQqUvvO7spG9mM_RcSY"
-                  target="_blank" 
+                  target="_blank"
                   rel="noopener noreferrer"
                 >
                   <button className="w-32 py-2 text-md md:text-sm rounded-xl font-medium bg-colorAccent text-primaryLight px-5">
@@ -92,11 +90,7 @@ const About = ({ onClose }) => {
                 <div className="text-lg font-medium md:2xl">
                   Jane Leslie Fiel
                 </div>
-                <a
-                  href=""
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
+                <a href="" target="_blank" rel="noopener noreferrer">
                   <button className="w-32 py-2 text-md md:text-sm rounded-xl font-medium bg-colorAccent text-primaryLight px-5">
                     View profile
                   </button>
@@ -109,7 +103,7 @@ const About = ({ onClose }) => {
                 </div>
                 <a
                   href="https://kennyjay-portfolio.netlify.app/"
-                  target="_blank" 
+                  target="_blank"
                   rel="noopener noreferrer"
                 >
                   <button className="w-32 py-2 text-md md:text-sm rounded-xl font-medium bg-colorAccent text-primaryLight px-5">
@@ -122,11 +116,7 @@ const About = ({ onClose }) => {
                 <div className="text-lg font-medium md:2xl">
                   Lourd Jonas Torrejos
                 </div>
-                <a
-                  href=""
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
+                <a href="" target="_blank" rel="noopener noreferrer">
                   <button className="w-32 py-2 text-md md:text-sm rounded-xl font-medium bg-colorAccent text-primaryLight px-5">
                     View profile
                   </button>

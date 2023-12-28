@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { IoCloseCircle } from 'react-icons/io5';
 import { BsPersonFill } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
@@ -31,15 +31,15 @@ const Contact = ({ onClose }) => {
   return (
     <div className="modal-overlay justify-center items-center flex fixed inset-0 z-50 bg-black bg-opacity-50 rounded-xl">
       <div className="modal justify-center items-center flex flex-col overflow-x-hidden overflow-y-auto relative w-auto my-6 mx-auto">
-        <div className="modal-content p-5 backdrop-filter bg-primaryLight rounded-xl max-h-full h-full font-poppins overflow-auto overflow-x-hidden mt-3 ml-20 mr-20 max-w-3xl">
+        <div className="modal-content px-11 py-5 backdrop-filter bg-primaryLight rounded-xl max-h-full h-full font-poppins overflow-auto overflow-x-hidden mt-3 ml-20 mr-20 w-[32rem] max-w-3xl">
           <div className="flex flex-row justify-between items-center mt-5 mb-7">
-            <div className="text-3xl font-semibold">Contact Us</div>
+            <div className="text-3xl font-semibold text-primaryDark">Contact Us</div>
             <IoCloseCircle size={25} color="gray" onClick={onClose} className=" cursor-pointer" />
           </div>
           {/* Full Name Input */}
           <div className="mb-2">
-            <div class="relative mt-3">
-              <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <div className="relative mt-3">
+              <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                 <BsPersonFill size={25} color="gray" />
               </div>
               <input 
@@ -52,8 +52,8 @@ const Contact = ({ onClose }) => {
           </div>
           {/* Email Input */}
           <div className="mb-3">
-            <div class="relative mt-3">
-              <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <div className="relative mt-3">
+              <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                 <MdEmail size={25} color="gray" />
               </div>
                 <input
@@ -85,7 +85,7 @@ const Contact = ({ onClose }) => {
           <button
             type="button"
             onClick={handleSubmit}
-            className="bg-colorAccent text-primaryLight font-semibold px-4 py-2 rounded-md"
+            className="bg-colorAccent text-primaryLight font-semibold px-6 py-2 rounded-md"
           >
             Send Message
           </button>
