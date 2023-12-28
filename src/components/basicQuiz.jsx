@@ -84,7 +84,7 @@ const BasicQuiz = ({ title, topic, language }) => {
             }`
           : "Question 1/?"}
       </div>
-      <div className="md:text-lg lg:text-xl text-primaryLight py-11">
+      <div className="md:text-lg lg:text-xl text-primaryLight py-11 select-none">
         {jsonData &&
           (jsonData.quiz
             ? jsonData.quiz[currentQuestion]?.question
@@ -92,9 +92,11 @@ const BasicQuiz = ({ title, topic, language }) => {
       </div>
       <ul className="list-none p-0">
         {Object.entries(
-          (jsonData.questions || jsonData.quiz)[currentQuestion]?.options ||
-            (jsonData.questions || jsonData.quiz)[currentQuestion]?.choices ||
+          (
+            (jsonData.questions && jsonData.questions[currentQuestion]) ||
+            (jsonData.quiz && jsonData.quiz[currentQuestion]) ||
             {}
+          ).options || {}
         ).map(([optionKey, optionValue]) => (
           <li key={optionKey}>
             <button

@@ -114,7 +114,7 @@ const BasicQuiz = ({ title, topic, language }) => {
       <div className="font-bold text-xl md:text-3xl text-primaryLight py-11">
         {title}
       </div>
-      <div className="font-bold md:text-lg lg:text-xl text-primaryLight">
+      <div className="font-bold md:text-lg lg:text-xl text-primaryLight select-none">
         {currentQuestion && jsonData && (jsonData.questions || jsonData.quiz)
           ? `Question ${currentQuestion + 1}/${
               jsonData.questions
