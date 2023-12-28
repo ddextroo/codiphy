@@ -50,7 +50,7 @@ const AppContainer = () => {
       errorElement: <Error />,
     },
     {
-      path: "/start",
+      path: "/quiz/start",
       element: <StartQuiz />,
       errorElement: <Error />,
     },

@@ -18,7 +18,7 @@ const Dashboard = () => {
               Logout
             </button>
             <button className="py-2 w-32 text-primaryLight bg-green-800 font-bold rounded-xl ">
-              <Link to="/start">Take quiz</Link>
+              <Link to="/quiz/start">Take quiz</Link>
             </button>
           </div>
         ) : (
