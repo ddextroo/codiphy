@@ -43,16 +43,24 @@ function Hero() {
             just a platform; it is your secret weapon for programming mastery.
           </div>
           <div className="flex flex-row space-x-3 mt-5 mb-5">
-            <button className="rounded-lg bg-colorAccent text-primaryLight px-5 py-2 font-semibold cursor-pointer">
-              {!authh ? (
-                <Link to="/login">Get Started</Link>
-              ) : (
-                <Link to="/quiz">Dashboard</Link>
-              )}
-            </button>
-            <button className="rounded-lg bg-primaryLight text-primaryDark border border-solid border-gray px-5 py-2 font-semibold cursor-pointer hover:bg-gray hover:bg-opacity-5 hover:text-primaryDark bg-transparent">
-              <Link to="/demo">Try Demo</Link>
-            </button>
+            {!authh ? (
+              <Link to="/login">
+                <button className="rounded-lg bg-colorAccent text-primaryLight px-5 py-2 font-semibold cursor-pointer">
+                  Get Started
+                </button>
+              </Link>
+            ) : (
+              <Link to="/quiz">
+                <button className="rounded-lg bg-colorAccent text-primaryLight px-5 py-2 font-semibold cursor-pointer">
+                  Dashboard
+                </button>
+              </Link>
+            )}
+            <Link to="/demo">
+              <button className="rounded-lg bg-primaryLight text-primaryDark border border-solid border-gray px-5 py-2 font-semibold cursor-pointer hover:bg-gray hover:bg-opacity-5 hover:text-primaryDark bg-transparent">
+                Try Demo
+              </button>
+            </Link>
           </div>
           <img src={Preview} className="w-auto h-72"></img>
         </div>

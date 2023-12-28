@@ -49,12 +49,12 @@ const Quiz = () => {
         } duration-200 bg-gradient-to-b from-colorAccent to-black  h-screen relative`}
       >
         <div
-          className={`absolute cursor-pointer rounded-full -right-4 top-9 border-2 border-colorAccent p-2 -mt-4 bg-primaryLight ${
+          className={`absolute cursor-pointer rounded-full -right-4 top-10 border-2 border-colorAccent p-2 -mt-4 bg-primaryLight ${
             !open && "rotate-180"
           }`}
           onClick={() => setOpen(!open)}
         >
-          <FaArrowLeft size={20} color="red" />
+          <FaArrowLeft size={15} color="red" />
         </div>
         <div className="flex flex-row gap-x-4 items-center p-5">
           <img
