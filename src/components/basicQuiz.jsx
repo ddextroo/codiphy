@@ -3,12 +3,13 @@ import useQuiz from "./../hooks/useQuiz";
 import { useState, useEffect } from "react";
 import loadingQuiz from "./../assets/loadingQuiz.json";
 import { Player } from "@lottiefiles/react-lottie-player";
+import Claim from "../hooks/useClaim";
 
 const BasicQuiz = ({ title, topic, language }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [score, setScore] = useState(0);
-  const [jsonData, setJsonData] = useState(null);
+  const [jsonData, setJsonData] = useState("");
   const [dataFetched, setDataFetched] = useState(false);
 
   const { response, loading } = useQuiz({
@@ -46,10 +47,21 @@ const BasicQuiz = ({ title, topic, language }) => {
     );
   }
 
-  const handleAnswer = (selectedOption) => {
-    const correctOption = (jsonData.questions || jsonData.quiz)[currentQuestion]
-      ?.answer;
+  const dataVar = jsonData.quiz?.questions
+    ? jsonData.quiz.questions
+    : jsonData.questions
+    ? jsonData.questions
+    : jsonData.quiz
+    ? jsonData.quiz
+    : "";
+  const questionChoices = dataVar[currentQuestion].options
+    ? dataVar[currentQuestion].options
+    : dataVar[currentQuestion].choices
+    ? dataVar[currentQuestion].choices
+    : {};
 
+  const handleAnswer = (selectedOption) => {
+    const correctOption = dataVar[currentQuestion]?.answer;
     setSelectedAnswer(selectedOption);
 
     if (selectedOption === correctOption) {
@@ -57,16 +69,19 @@ const BasicQuiz = ({ title, topic, language }) => {
     }
   };
 
-  const correctOption = (jsonData.questions || jsonData.quiz)[currentQuestion]
-    ?.answer;
+  const correctOption = dataVar[currentQuestion]?.answer;
 
   const handleNextQuestion = () => {
     setSelectedAnswer(null);
     const nextQuestion = currentQuestion + 1;
-    if (nextQuestion < jsonData.quiz.length) {
+
+    const quizLength = dataVar.length;
+
+    if (nextQuestion < quizLength) {
       setCurrentQuestion(nextQuestion);
     } else {
-      alert(`Quiz completed! Your score: ${score}/${jsonData.quiz.length}`);
+      alert(`Quiz completed! Your score: ${score}/${quizLength}`);
+      Claim(score, "Basic");
     }
   };
 
@@ -76,28 +91,19 @@ const BasicQuiz = ({ title, topic, language }) => {
         {title}
       </div>
       <div className="font-bold md:text-lg lg:text-xl text-primaryLight">
-        {currentQuestion && jsonData && (jsonData.questions || jsonData.quiz)
-          ? `Question ${currentQuestion + 1}/${
-              jsonData.questions
-                ? jsonData.questions.length
-                : jsonData.quiz.length
-            }`
-          : "Question 1/?"}
+        {jsonData && (
+          <p>
+            Question {currentQuestion + 1}/{dataVar.length}
+          </p>
+        )}
       </div>
+
       <div className="md:text-lg lg:text-xl text-primaryLight py-11 select-none">
-        {jsonData &&
-          (jsonData.quiz
-            ? jsonData.quiz[currentQuestion]?.question
-            : jsonData.questions?.[currentQuestion]?.question)}
+        <div>{dataVar[currentQuestion].question}</div>
       </div>
+
       <ul className="list-none p-0">
-        {Object.entries(
-          (
-            (jsonData.questions && jsonData.questions[currentQuestion]) ||
-            (jsonData.quiz && jsonData.quiz[currentQuestion]) ||
-            {}
-          ).options || {}
-        ).map(([optionKey, optionValue]) => (
+        {Object.entries(questionChoices).map(([optionKey, optionValue]) => (
           <li key={optionKey}>
             <button
               onClick={() => handleAnswer(optionKey)}

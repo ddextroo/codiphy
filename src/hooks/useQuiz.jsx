@@ -11,7 +11,7 @@ const useQuiz = ({ topic, language, type }) => {
       const response = await axios.post(import.meta.env.VITE_API_URL, {
         topic,
         language,
-        items: 30,
+        items: 50,
         type,
       });
       setResponse(response.data);

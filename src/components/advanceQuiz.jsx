@@ -6,6 +6,7 @@ import SyntaxHighlighter from "react-syntax-highlighter";
 import { dark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import loadingQuiz from "./../assets/loadingQuiz.json";
 import { Player } from "@lottiefiles/react-lottie-player";
+import Claim from "../hooks/useClaim";
 
 const BasicQuiz = ({ title, topic, language }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -66,9 +67,14 @@ const BasicQuiz = ({ title, topic, language }) => {
     );
   }
 
+  const dataVar = jsonData.questions
+    ? jsonData.questions
+    : jsonData.quiz
+    ? jsonData.quiz
+    : "";
+
   const handleAnswer = () => {
-    const correctOption = (jsonData.questions || jsonData.quiz)[currentQuestion]
-      ?.answer;
+    const correctOption = dataVar[currentQuestion]?.answer;
 
     if (formData.answer === correctOption) {
       setScore(score + 1);
@@ -84,13 +90,12 @@ const BasicQuiz = ({ title, topic, language }) => {
     setSelectedAnswer(null);
     setIsAnswerCorrect(false); // Reset the correct answer state
     const nextQuestion = currentQuestion + 1;
-    const length = jsonData.questions
-      ? jsonData.questions.length
-      : jsonData.quiz.length;
+    const length = dataVar.length;
     if (nextQuestion < length) {
       setCurrentQuestion(nextQuestion);
     } else {
       alert(`Quiz completed! Your score: ${score}/${length}`);
+      Claim(score, "Advance");
     }
     setFormData({
       answer: "",
@@ -115,29 +120,21 @@ const BasicQuiz = ({ title, topic, language }) => {
         {title}
       </div>
       <div className="font-bold md:text-lg lg:text-xl text-primaryLight select-none">
-        {currentQuestion && jsonData && (jsonData.questions || jsonData.quiz)
-          ? `Question ${currentQuestion + 1}/${
-              jsonData.questions
-                ? jsonData.questions.length
-                : jsonData.quiz.length
-            }`
-          : "Question 1/?"}
+        {jsonData && (
+          <p>
+            Question {currentQuestion + 1}/{dataVar.length}
+          </p>
+        )}
       </div>
       <div className="md:text-lg lg:text-xl text-primaryLight py-11">
-        {jsonData &&
-          (jsonData.quiz
-            ? jsonData.quiz[currentQuestion]?.question
-            : jsonData.questions?.[currentQuestion]?.question)}
+        {dataVar[currentQuestion]?.question}
       </div>
       <SyntaxHighlighter
         language={language}
         style={dark}
         className="select-none"
       >
-        {jsonData &&
-          (jsonData.quiz
-            ? jsonData.quiz[currentQuestion]?.code
-            : jsonData.questions?.[currentQuestion]?.code)}
+        {dataVar[currentQuestion]?.code}
       </SyntaxHighlighter>
       <div>
         <form onSubmit={handleSubmit} className="w-full">

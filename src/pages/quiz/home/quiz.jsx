@@ -45,7 +45,7 @@ const Quiz = () => {
     <div className="flex font-montserrat min-h-screen items-stretch">
       <div
         className={`${
-          open ? "w-72 xl:h-[60rem]" : "w-[5rem]"
+          open ? "w-72 xl:h-[72rem]" : "w-[5rem]"
         } duration-200 bg-gradient-to-b from-colorAccent to-black h-[99rem] md:h-[60rem] xl:h-screen relative`}
       >
         <div

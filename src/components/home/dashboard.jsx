@@ -118,11 +118,10 @@ const Dashboard = ({ open }) => {
                   <div className="text-sm text-gray">
                     {data ? data.points : 0}
                   </div>
-                  <div className="w-44 md:w-24 lg:w-32 bg-colorAccent from-10%  h-2 rounded-xl relative">
+                  <div className="w-44 md:w-24 lg:w-32 bg-colorAccent h-2 rounded-xl relative">
                     <div
-                      className={`absolute w-[${
-                        data ? data.points : 0
-                      }%] h-2 bg-green-800 rounded-xl rounded-e-lg`}
+                      style={{ width: `${data ? data.points : 0}%` }}
+                      className="absolute h-2 duration-200 bg-gradient-to-r from-green-800 to-transparent rounded-xl rounded-e-lg"
                     ></div>
                   </div>
                   <div className="flex flex-row items-center">
@@ -180,34 +179,35 @@ const Dashboard = ({ open }) => {
           <div className="px-5 md:px-10 lg:px-20 flex flex-col md:flex-row justify-center md:space-x-10 lg:space-x-11">
             {["Basic", "Advance"].map((category, index) => (
               <div
-                key={index}
-                className="h-80 w-full md:w-[21rem] lg:w-[25rem] shadow-xl bg-primaryLight2 rounded-xl p-7 flex flex-col justify-center items-center cursor-pointer mb-5 md:mb-0 hover:bg-colorAccent duration-300"
+              key={index}
+              className="group h-80 w-full md:w-[21rem] lg:w-[25rem] shadow-xl bg-primaryLight2 rounded-xl p-7 flex flex-col justify-center items-center cursor-pointer mb-5 md:mb-0 hover:bg-colorAccent duration-300"
+            >
+              <Link
+                to={"/quiz/start"}
+                state={{
+                  language: displayText(selectedLanguage),
+                  topic: selectedTopic,
+                  category: category,
+                }}
               >
-                <Link
-                  to={"/quiz/start"}
-                  state={{
-                    language: displayText(selectedLanguage),
-                    topic: selectedTopic,
-                    category: category,
-                  }}
-                >
-                  <div className="w-full flex justify-center">
-                    <img
-                      src={index === 0 ? basic : advance}
-                      className="w-44 h-44"
-                      alt={`category-${index}`}
-                    />
-                  </div>
-                  <div className="font-bold text-2xl text-primaryDark hover:text-primaryLight">
-                    {category}
-                  </div>
-                  <div className="font-medium text-sm mt-2 hover:text-primaryLight2 text-gray ">
-                    {index === 0
-                      ? "Dive into fundamental concepts and build a solid foundation for your coding prowess. Perfect for beginners!"
-                      : "Ready for a challenge? Elevate your skills with advanced topics and take your programming journey to new heights!"}
-                  </div>
-                </Link>
-              </div>
+                <div className="w-full flex justify-center">
+                  <img
+                    src={index === 0 ? basic : advance}
+                    className="w-44 h-44"
+                    alt={`category-${index}`}
+                  />
+                </div>
+                <div className="font-bold text-2xl text-primaryDark group-hover:text-primaryLight">
+                  {category}
+                </div>
+                <div className="font-medium text-sm mt-2 group-hover:text-primaryLight2 text-gray">
+                  {index === 0
+                    ? "Dive into fundamental concepts and build a solid foundation for your coding prowess. Perfect for beginners!"
+                    : "Ready for a challenge? Elevate your skills with advanced topics and take your programming journey to new heights!"}
+                </div>
+              </Link>
+            </div>
+            
             ))}
           </div>
         </div>
