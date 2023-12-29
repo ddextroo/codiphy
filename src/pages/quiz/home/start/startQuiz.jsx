@@ -1,46 +1,27 @@
-import React, { useState } from "react";
 import BasicQuiz from "./../../../../components/basicQuiz";
 import AdvanceQuiz from "./../../../../components/advanceQuiz";
-import SelectTopic from './../../../../components/SelectTopic'
+import SelectTopic from "./../../../../components/SelectTopic";
+import { useLocation } from "react-router-dom";
 
 function StartQuiz() {
-  // Assuming you have a state to track the user's choice (basic or advance)
-  const [quizType, setQuizType] = useState("advance"); // Defaulting to basic
-
-  // Function to handle the user's choice
-  // const handleQuizTypeChange = (type) => {
-  //   setQuizType(type);
-  // };
-
-  // Example data (replace with your actual data)
-  const topic = "Operators and Conditions";
-  const language = "Python";
+  const location = useLocation();
+  const { language, topic, category } = location.state;
 
   const getTitle = () => {
-    return `${language} - ${topic} | ${quizType.charAt(0).toUpperCase() + quizType.slice(1)}`;
+    return `${language} - ${topic} | ${
+      category.charAt(0).toUpperCase() + category.slice(1)
+    }`;
   };
 
   return (
     <div className="bg-gradient-to-b from-colorAccent to-black font-montserrat h-full min-h-screen">
-      {quizType === 'basic' && (
+      {category === "Basic" && (
         <BasicQuiz title={getTitle()} topic={topic} language={language} />
       )}
-      {quizType === 'advance' && (
+      {category === "Advance" && (
         <AdvanceQuiz title={getTitle()} topic={topic} language={language} />
       )}
-      {quizType === null && (
-        <SelectTopic/>
-      )}
-
-      {/* Example: Buttons to switch between basic and advance quizzes */}
-      {/* <div>
-        <button onClick={() => handleQuizTypeChange("basic")}>
-          Basic Quiz
-        </button>
-        <button onClick={() => handleQuizTypeChange("advance")}>
-          Advance Quiz
-        </button>
-      </div> */}
+      {category === null && <SelectTopic />}
     </div>
   );
 }

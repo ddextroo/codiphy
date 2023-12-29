@@ -3,18 +3,18 @@ import { FaArrowLeft } from "react-icons/fa";
 import { MdSpaceDashboard, MdOutlineDashboard } from "react-icons/md";
 import { MdLeaderboard, MdOutlineLeaderboard } from "react-icons/md";
 import { FaUser, FaRegUser } from "react-icons/fa";
-import Dashboard from './../../../components/home/dashboard'
-import Leaderboards from './../../../components/home/leaderboards'
-import Profile from './../../../components/home/profile'
+import Dashboard from "./../../../components/home/dashboard";
+import Leaderboards from "./../../../components/home/leaderboards";
+import Profile from "./../../../components/home/profile";
 import logo from "./../../../assets/logo.png";
-
-const DashboardComponent = () => <Dashboard />;
-const LeaderboardComponent = () => <Leaderboards />;
-const ProfileComponent = () => <Profile />;
 
 const Quiz = () => {
   const [open, setOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(0);
+
+  const DashboardComponent = () => <Dashboard open={open} />;
+  const LeaderboardComponent = () => <Leaderboards />;
+  const ProfileComponent = () => <Profile />;
 
   const menuItems = [
     {
@@ -42,11 +42,11 @@ const Quiz = () => {
   };
 
   return (
-    <div className="flex font-montserrat min-h-screen">
+    <div className="flex font-montserrat min-h-screen items-stretch">
       <div
         className={`${
-          open ? "w-72" : "w-[5rem]"
-        } duration-200 bg-gradient-to-b from-colorAccent to-black  h-screen relative`}
+          open ? "w-72 xl:h-[60rem]" : "w-[5rem]"
+        } duration-200 bg-gradient-to-b from-colorAccent to-black h-[99rem] md:h-[60rem] xl:h-screen relative`}
       >
         <div
           className={`absolute cursor-pointer rounded-full -right-4 top-10 border-2 border-colorAccent p-2 -mt-4 bg-primaryLight ${
@@ -91,9 +91,7 @@ const Quiz = () => {
           ))}
         </ul>
       </div>
-      <div className="flex-1">
-        {menuItems[selectedItem].component}
-      </div>
+      <div className="flex-1">{menuItems[selectedItem].component}</div>
     </div>
   );
 };

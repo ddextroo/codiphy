@@ -93,7 +93,9 @@ function Signup() {
     )
       .then(async (userCredential) => {
         const user = userCredential.user;
-        console.log(user);
+        await user.updateProfile({
+          displayName: formData.displayName,
+        });
         closeLoading();
         dispatch({ type: "LOGIN", payload: user });
         await createUserDocumentEmail(
