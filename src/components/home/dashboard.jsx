@@ -52,6 +52,23 @@ const Dashboard = ({ open }) => {
     { src: img5 },
   ];
 
+  const badges = [
+    { points: 10, image: badge1, title: "Novice Coder" },
+    { points: 50, image: badge2, title: "Code Explorer" },
+    { points: 100, image: badge3, title: "Scripting Enthusiast" },
+    { points: 200, image: badge4, title: "Coding Maestro" },
+    { points: 500, image: badge5, title: "Algorithm Ace" },
+    { points: 1000, image: badge6, title: "Programming Prodigy" },
+  ];
+
+  const coinPoints = data.points;
+
+  const selectedBadge =
+    badges
+      .slice()
+      .reverse()
+      .find((badge) => coinPoints >= badge.points) || badges[0];
+
   const [selectedLanguage, setSelectedLanguage] = useState("JavaScript");
   const [selectedTopic, setSelectedTopic] = useState(
     "Introduction to Javascript"
@@ -110,39 +127,13 @@ const Dashboard = ({ open }) => {
             >
               <div className="flex flex-col justify-center items-center relative">
                 <img
-                  src={
-                    data.points <= 10
-                      ? badge1
-                      : data.points <= 50
-                      ? badge2
-                      : data.points <= 100
-                      ? badge3
-                      : data.points <= 200
-                      ? badge4
-                      : data.points <= 500
-                      ? badge5
-                      : data.points <= 1000
-                      ? badge6
-                      : badge1
-                  }
+                  src={selectedBadge.image}
                   className={`w-[8rem] h-[8rem] lg:w-[9rem] lg:h-[9rem] ${
                     open ? "hidden md:block" : ""
                   }`}
                 />
-                <div className="font-medium absolute text-sm bottom-2 text-primaryDark">
-                  {data.points <= 10
-                    ? "Novice Coder"
-                    : data.points <= 50
-                    ? "Code Explorer"
-                    : data.points <= 100
-                    ? "Scripting Enthusiast"
-                    : data.points <= 200
-                    ? "Coding Maestro"
-                    : data.points <= 500
-                    ? "Algorithm Ace"
-                    : data.points <= 1000
-                    ? "Programming Prodigy"
-                    : "Novice Coder"}
+                <div className="font-medium absolute text-sm bottom-0 text-primaryDark">
+                  {selectedBadge.title}
                 </div>
               </div>
               <div className="h-40 ml-5  text-primaryDark flex flex-col items-start justify-center space-y-3">
@@ -168,7 +159,7 @@ const Dashboard = ({ open }) => {
                   </div>
                 </div>
               </div>
-              <div className="flex items-center space-x-2 ml-11  mt-3 justify-center col-span-3 col-start-1 col-end-4 ">
+              <div className="flex items-center space-x-2 ml-11 mt-3 justify-center col-span-3 col-start-1 col-end-4">
                 <div className="text-sm text-gray">
                   {data ? data.points : 0}
                 </div>
@@ -176,9 +167,9 @@ const Dashboard = ({ open }) => {
                   <div
                     style={{
                       width: `${
-                        data
-                          ? ((data.points > 1000 ? 1000 : data) / 1000) * 100
-                          : 0
+                        data && data.points <= 1000
+                          ? (data.points / 1000) * 100
+                          : 100 // set to 100% if points exceed 1000
                       }%`,
                     }}
                     className="absolute h-2 duration-200 bg-green-600 rounded-xl rounded-e-lg animate-pulse"
