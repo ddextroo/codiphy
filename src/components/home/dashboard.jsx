@@ -11,6 +11,7 @@ import img2 from "./../../assets/banners/2.png";
 import img3 from "./../../assets/banners/3.png";
 import img4 from "./../../assets/banners/4.png";
 import img5 from "./../../assets/banners/5.png";
+import profile from './../../assets/profile.png';
 
 import basic from "./../../assets/svg/basic.svg";
 import advance from "./../../assets/svg/advance.svg";
@@ -101,14 +102,14 @@ const Dashboard = ({ open }) => {
               className={`w-full lg:w-full h-56 shadow-xl bg-primaryLight2 rounded-xl flex items-center sm:p-3`}
             >
               <img
-                src={user.photoURL}
+                src={user.photoURL ? user.photoURL : profile}
                 className={`ml-2 w-[5rem] h-[5rem] md:w-[7rem] md:h-[7rem] lg:w-[9rem] lg:h-[9rem] bg-gradient-to-b from-colorAccent to-black rounded-full  ${
                   open ? "hidden md:block" : ""
                 }`}
               />
               <div className="h-40 ml-5  text-primaryDark flex flex-col items-start space-y-3">
                 <div className="text-2xl md:text-lg lg:text-2xl font-bold">
-                  {user.displayName}
+                  {data.username ? data.username : user.displayName}
                 </div>
                 <div className="font-medium text-md: lg:text-xl flex flex-row items-center">
                   <img src={points} className="-ml-2 mr-2 w-10 h-10" />

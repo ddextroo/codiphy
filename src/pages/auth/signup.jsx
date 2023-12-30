@@ -6,6 +6,7 @@ import { auth } from "./../../firebase/config";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  updateProfile,
 } from "firebase/auth";
 import { Outlet, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -93,9 +94,7 @@ function Signup() {
     )
       .then(async (userCredential) => {
         const user = userCredential.user;
-        await user.updateProfile({
-          displayName: formData.displayName,
-        });
+        await updateProfile(user, { displayName: formData.displayName });
         closeLoading();
         dispatch({ type: "LOGIN", payload: user });
         await createUserDocumentEmail(
