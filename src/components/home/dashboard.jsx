@@ -125,14 +125,14 @@ const Dashboard = ({ open }) => {
             <div
               className={`w-full lg:w-full h-56 shadow-xl bg-primaryLight2 rounded-xl grid grid-cols-2 place-content-center pr-11`}
             >
-              <div className="flex flex-col justify-center items-center relative">
+              <div className="flex flex-col  items-center relative">
                 <img
                   src={selectedBadge.image}
-                  className={`w-[8rem] h-[8rem] lg:w-[9rem] lg:h-[9rem] ${
+                  className={`w-[8rem] h-[8rem] lg:w-[9rem] lg:h-[9rem] mix-blend-multiply ${
                     open ? "hidden md:block" : ""
                   }`}
                 />
-                <div className="font-medium absolute text-sm bottom-0 text-primaryDark">
+                <div className="font-semibold absolute md:text-md lg:text-sm bottom-0 text-primaryDark">
                   {selectedBadge.title}
                 </div>
               </div>
