@@ -11,10 +11,17 @@ import img2 from "./../../assets/banners/2.png";
 import img3 from "./../../assets/banners/3.png";
 import img4 from "./../../assets/banners/4.png";
 import img5 from "./../../assets/banners/5.png";
-import profile from './../../assets/profile.png';
+import profile from "./../../assets/profile.png";
 
 import basic from "./../../assets/svg/basic.svg";
 import advance from "./../../assets/svg/advance.svg";
+
+import badge1 from "./../../assets/badges/badge1.jpg";
+import badge2 from "./../../assets/badges/badge2.jpg";
+import badge3 from "./../../assets/badges/badge3.jpg";
+import badge4 from "./../../assets/badges/badge4.jpg";
+import badge5 from "./../../assets/badges/badge5.jpg";
+import badge6 from "./../../assets/badges/badge6.jpg";
 
 import Dropdown from "./../../components/dropdown";
 import Categories from "./../../model/categories";
@@ -99,15 +106,46 @@ const Dashboard = ({ open }) => {
               </Splide>
             </div>
             <div
-              className={`w-full lg:w-full h-56 shadow-xl bg-primaryLight2 rounded-xl flex items-center pr-5`}
+              className={`w-full lg:w-full h-56 shadow-xl bg-primaryLight2 rounded-xl grid grid-cols-2 place-content-center pr-11`}
             >
-              <img
-                src={user.photoURL ? user.photoURL : profile}
-                className={`ml-2 w-[5rem] h-[5rem] md:w-[7rem] md:h-[7rem] lg:w-[9rem] lg:h-[9rem] bg-gradient-to-b from-colorAccent to-black rounded-full  ${
-                  open ? "hidden md:block" : ""
-                }`}
-              />
-              <div className="h-40 ml-5  text-primaryDark flex flex-col items-start space-y-3">
+              <div className="flex flex-col justify-center items-center relative">
+                <img
+                  src={
+                    data.points <= 10
+                      ? badge1
+                      : data.points <= 50
+                      ? badge2
+                      : data.points <= 100
+                      ? badge3
+                      : data.points <= 200
+                      ? badge4
+                      : data.points <= 500
+                      ? badge5
+                      : data.points <= 1000
+                      ? badge6
+                      : badge1
+                  }
+                  className={`w-[8rem] h-[8rem] lg:w-[9rem] lg:h-[9rem] ${
+                    open ? "hidden md:block" : ""
+                  }`}
+                />
+                <div className="font-medium absolute text-sm bottom-2 text-primaryDark">
+                  {data.points <= 10
+                    ? "Novice Coder"
+                    : data.points <= 50
+                    ? "Code Explorer"
+                    : data.points <= 100
+                    ? "Scripting Enthusiast"
+                    : data.points <= 200
+                    ? "Coding Maestro"
+                    : data.points <= 500
+                    ? "Algorithm Ace"
+                    : data.points <= 1000
+                    ? "Programming Prodigy"
+                    : "Novice Coder"}
+                </div>
+              </div>
+              <div className="h-40 ml-5  text-primaryDark flex flex-col items-start justify-center space-y-3">
                 <div className="text-2xl md:text-lg lg:text-2xl font-bold">
                   {data.username ? data.username : user.displayName}
                 </div>
@@ -115,32 +153,39 @@ const Dashboard = ({ open }) => {
                   <img src={points} className="-ml-2 mr-2 w-10 h-10" />
                   <div>{data ? data.points : 0}</div>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <div className="text-sm text-gray">
-                    {data ? data.points : 0}
-                  </div>
-                  <div className="w-44 md:w-24 lg:w-24 bg-colorAccent h-2 rounded-xl relative">
-                    <div
-                      style={{ width: `${data ? data.points : 0}%` }}
-                      className="absolute h-2 duration-200 bg-gradient-to-r from-green-800 to-transparent rounded-xl rounded-e-lg"
-                    ></div>
-                  </div>
-                  <div className="flex flex-row items-center">
-                    <div className="text-sm text-gray mr-4">100</div>
-                  </div>
-                </div>
+
                 <div className="flex flex-row items-center">
                   <div className="shadow-xl mr-4 rounded-xl bg-primaryLight2">
-                    <FaCheckCircle size={20} color="green" />
+                    <FaCheckCircle size={25} color="green" />
                   </div>
-                  <div className="flex flex-row items-center sm:flex-col">
-                    <div className="text-md md:text-lg lg:text-xl font-bold text-primaryDark text-left">
+                  <div className="flex flex-row items-start sm:flex-col">
+                    <div className="text-md md:text-lg lg:text-xl font-medium text-primaryDark text-left">
                       {data ? data.correctAnswers : 0}
                     </div>
-                    <div className="text-sm font-medium text-gray -mt-1 ml-2">
+                    {/* <div className="text-sm font-medium text-gray md:-mt-1 ml-2 sm:ml-0">
                       Correct Answers
-                    </div>
+                    </div> */}
                   </div>
+                </div>
+              </div>
+              <div className="flex items-center space-x-2 ml-11  mt-3 justify-center col-span-3 col-start-1 col-end-4 ">
+                <div className="text-sm text-gray">
+                  {data ? data.points : 0}
+                </div>
+                <div className="w-full bg-colorAccent h-2 rounded-xl relative">
+                  <div
+                    style={{
+                      width: `${
+                        data
+                          ? ((data.points > 1000 ? 1000 : data) / 1000) * 100
+                          : 0
+                      }%`,
+                    }}
+                    className="absolute h-2 duration-200 bg-green-600 rounded-xl rounded-e-lg animate-pulse"
+                  ></div>
+                </div>
+                <div className="flex flex-row items-center">
+                  <div className="text-sm text-gray mr-4">1000</div>
                 </div>
               </div>
             </div>
@@ -180,35 +225,34 @@ const Dashboard = ({ open }) => {
           <div className="px-5 md:px-10 lg:px-20 flex flex-col md:flex-row justify-center md:space-x-10 lg:space-x-11">
             {["Basic", "Advance"].map((category, index) => (
               <div
-              key={index}
-              className="group h-80 w-full md:w-[21rem] lg:w-[25rem] shadow-xl bg-primaryLight2 rounded-xl p-7 flex flex-col justify-center items-center cursor-pointer mb-5 md:mb-0 hover:bg-colorAccent duration-300"
-            >
-              <Link
-                to={"/quiz/start"}
-                state={{
-                  language: displayText(selectedLanguage),
-                  topic: selectedTopic,
-                  category: category,
-                }}
+                key={index}
+                className="group h-80 w-full md:w-[21rem] lg:w-[25rem] shadow-xl bg-primaryLight2 rounded-xl p-7 flex flex-col justify-center items-center cursor-pointer mb-5 md:mb-0 hover:bg-colorAccent duration-300"
               >
-                <div className="w-full flex justify-center">
-                  <img
-                    src={index === 0 ? basic : advance}
-                    className="w-44 h-44"
-                    alt={`category-${index}`}
-                  />
-                </div>
-                <div className="font-bold text-2xl text-primaryDark group-hover:text-primaryLight">
-                  {category}
-                </div>
-                <div className="font-medium text-sm mt-2 group-hover:text-primaryLight2 text-gray">
-                  {index === 0
-                    ? "Dive into fundamental concepts and build a solid foundation for your coding prowess. Perfect for beginners!"
-                    : "Ready for a challenge? Elevate your skills with advanced topics and take your programming journey to new heights!"}
-                </div>
-              </Link>
-            </div>
-            
+                <Link
+                  to={"/quiz/start"}
+                  state={{
+                    language: displayText(selectedLanguage),
+                    topic: selectedTopic,
+                    category: category,
+                  }}
+                >
+                  <div className="w-full flex justify-center">
+                    <img
+                      src={index === 0 ? basic : advance}
+                      className="w-44 h-44"
+                      alt={`category-${index}`}
+                    />
+                  </div>
+                  <div className="font-bold text-2xl text-primaryDark group-hover:text-primaryLight">
+                    {category}
+                  </div>
+                  <div className="font-medium text-sm mt-2 group-hover:text-primaryLight2 text-gray">
+                    {index === 0
+                      ? "Dive into fundamental concepts and build a solid foundation for your coding prowess. Perfect for beginners!"
+                      : "Ready for a challenge? Elevate your skills with advanced topics and take your programming journey to new heights!"}
+                  </div>
+                </Link>
+              </div>
             ))}
           </div>
         </div>
