@@ -6,6 +6,7 @@ import SyntaxHighlighter from "react-syntax-highlighter";
 import { dark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import loadingQuiz from "./../assets/loadingQuiz.json";
 import { Player } from "@lottiefiles/react-lottie-player";
+import Timer from "./timer";
 import Claim from "../hooks/useClaim";
 
 const BasicQuiz = ({ title, topic, language }) => {
@@ -84,6 +85,10 @@ const BasicQuiz = ({ title, topic, language }) => {
     }
 
     setSelectedAnswer(formData.answer);
+
+    setTimeout(() => {
+      handleNextQuestion();
+    }, 2500);
   };
 
   const handleNextQuestion = () => {
@@ -116,7 +121,8 @@ const BasicQuiz = ({ title, topic, language }) => {
 
   return (
     <div className="h-full min-h-screen flex flex-col items-center justify-center space-y-4 mx-10 ">
-      <div className="font-bold text-xl md:text-3xl text-primaryLight py-11">
+      <div className="font-bold text-xl md:text-3xl text-primaryLight py-11 flex flex-col gap-y-5">
+        <Timer duration={120} onFinish={handleNextQuestion} />
         {title}
       </div>
       <div className="font-bold md:text-lg lg:text-xl text-primaryLight select-none">

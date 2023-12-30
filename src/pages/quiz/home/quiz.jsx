@@ -46,7 +46,7 @@ const Quiz = () => {
       <div
         className={`${
           open ? "w-72 xl:h-[72rem]" : "w-[5rem]"
-        } duration-200 bg-gradient-to-b from-colorAccent to-black h-[99rem] md:h-[60rem] xl:h-screen relative`}
+        } duration-200 bg-gradient-to-b from-colorAccent to-black h-[99rem] md:h-[60rem] xl:h-[50rem] relative`}
       >
         <div
           className={`absolute cursor-pointer rounded-full -right-4 top-10 border-2 border-colorAccent p-2 -mt-4 bg-primaryLight ${
@@ -91,7 +91,7 @@ const Quiz = () => {
           ))}
         </ul>
       </div>
-      <div className="flex-1">{menuItems[selectedItem].component}</div>
+      <div className="flex-1 duration-300">{menuItems[selectedItem].component}</div>
     </div>
   );
 };

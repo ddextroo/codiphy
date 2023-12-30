@@ -23,7 +23,7 @@ const Claim = async (score, type) => {
       existingCorrectAnswers = snapshot.data().correctAnswers;
       existingPoints = snapshot.data().points;
       await updateDoc(userDocRef, {
-        points: (type === "Basic" ? score * 2 : score) + existingPoints,
+        points: (type === "Basic" ? score : (score * 3)) + existingPoints,
         correctAnswers: score + existingCorrectAnswers,
       });
     } else {

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import loadingQuiz from "./../assets/loadingQuiz.json";
 import { Player } from "@lottiefiles/react-lottie-player";
 import Claim from "../hooks/useClaim";
+import Timer from "./timer";
 
 const BasicQuiz = ({ title, topic, language }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -67,6 +68,9 @@ const BasicQuiz = ({ title, topic, language }) => {
     if (selectedOption === correctOption) {
       setScore(score + 1);
     }
+    setTimeout(() => {
+      handleNextQuestion();
+    }, 2500);
   };
 
   const correctOption = dataVar[currentQuestion]?.answer;
@@ -87,7 +91,8 @@ const BasicQuiz = ({ title, topic, language }) => {
 
   return (
     <div className="h-full min-h-screen flex flex-col items-center justify-center space-y-4 mx-10 ">
-      <div className="font-bold text-xl md:text-3xl text-primaryLight py-11">
+      <div className="font-bold text-xl md:text-3xl text-primaryLight py-11 flex flex-col gap-y-5">
+        <Timer duration={30} onFinish={handleNextQuestion} />
         {title}
       </div>
       <div className="font-bold md:text-lg lg:text-xl text-primaryLight">
@@ -97,7 +102,6 @@ const BasicQuiz = ({ title, topic, language }) => {
           </p>
         )}
       </div>
-
       <div className="md:text-lg lg:text-xl text-primaryLight py-11 select-none">
         <div>{dataVar[currentQuestion].question}</div>
       </div>

@@ -99,7 +99,7 @@ const Dashboard = ({ open }) => {
               </Splide>
             </div>
             <div
-              className={`w-full lg:w-full h-56 shadow-xl bg-primaryLight2 rounded-xl flex items-center sm:p-3`}
+              className={`w-full lg:w-full h-56 shadow-xl bg-primaryLight2 rounded-xl flex items-center pr-5`}
             >
               <img
                 src={user.photoURL ? user.photoURL : profile}
@@ -119,7 +119,7 @@ const Dashboard = ({ open }) => {
                   <div className="text-sm text-gray">
                     {data ? data.points : 0}
                   </div>
-                  <div className="w-44 md:w-24 lg:w-32 bg-colorAccent h-2 rounded-xl relative">
+                  <div className="w-44 md:w-24 lg:w-24 bg-colorAccent h-2 rounded-xl relative">
                     <div
                       style={{ width: `${data ? data.points : 0}%` }}
                       className="absolute h-2 duration-200 bg-gradient-to-r from-green-800 to-transparent rounded-xl rounded-e-lg"
