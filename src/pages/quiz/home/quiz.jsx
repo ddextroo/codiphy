@@ -91,7 +91,9 @@ const Quiz = () => {
           ))}
         </ul>
       </div>
-      <div className="flex-1 duration-300">{menuItems[selectedItem].component}</div>
+      <div className="flex-1 duration-300">
+        {menuItems[selectedItem].component}
+      </div>
     </div>
   );
 };

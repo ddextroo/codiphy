@@ -11,7 +11,6 @@ import img2 from "./../../assets/banners/2.png";
 import img3 from "./../../assets/banners/3.png";
 import img4 from "./../../assets/banners/4.png";
 import img5 from "./../../assets/banners/5.png";
-import profile from "./../../assets/profile.png";
 
 import basic from "./../../assets/svg/basic.svg";
 import advance from "./../../assets/svg/advance.svg";
@@ -29,6 +28,7 @@ import { MdTopic } from "react-icons/md";
 import points from "./../../assets/points.png";
 import { db, auth } from "../../firebase/config";
 import { onAuthStateChanged } from "firebase/auth";
+import { Helmet } from "react-helmet";
 import { getDoc, doc } from "firebase/firestore";
 
 const Dashboard = ({ open }) => {
@@ -95,6 +95,9 @@ const Dashboard = ({ open }) => {
 
   return authIsReady ? (
     <div className="font-montserrat duration-300">
+      <Helmet>
+        <title>Codiphy :: Dashboard</title>
+      </Helmet>
       {user ? (
         <div>
           <div
@@ -138,7 +141,7 @@ const Dashboard = ({ open }) => {
               </div>
               <div className="h-40 ml-5  text-primaryDark flex flex-col items-start justify-center space-y-3">
                 <div className="text-2xl md:text-lg lg:text-2xl font-bold">
-                  {data.username ? data.username : user.displayName}
+                  {data.username ? data.username : "user"}
                 </div>
                 <div className="font-medium text-md: lg:text-xl flex flex-row items-center">
                   <img src={points} className="-ml-2 mr-2 w-10 h-10" />

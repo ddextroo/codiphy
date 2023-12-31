@@ -7,6 +7,7 @@ import { auth } from "../../firebase/config";
 import { ToastContainer, toast } from "react-toastify";
 import Loading from "../../components/loading";
 import "react-toastify/dist/ReactToastify.css";
+import { Helmet } from "react-helmet";
 
 function ForgotPassword() {
   const [showLoading, setshowLoading] = useState(false);
@@ -71,6 +72,9 @@ function ForgotPassword() {
   return (
     <div className="min-h-screen flex flex-col md:flex-row font-montserrat">
       {/* Left side */}
+      <Helmet>
+        <title>Codiphy :: Forgot Password</title>
+      </Helmet>
       <div className="flex-1 bg-primaryLight flex flex-col justify-center items-center p-8">
         <div className="text-2xl font-bold mb-4 md:text-5xl">
           Forgot Password

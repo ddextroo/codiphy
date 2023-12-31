@@ -15,6 +15,7 @@ import { createUserDocumentEmail } from "../../firebase/createUserDocument";
 import { useLogin } from "./../../hooks/useLogin";
 import { ToastContainer, toast } from "react-toastify";
 import Loading from "../../components/loading";
+import { Helmet } from 'react-helmet';
 import "react-toastify/dist/ReactToastify.css";
 
 function Signup() {
@@ -120,6 +121,9 @@ function Signup() {
   return (
     <div className="min-h-screen flex flex-col md:flex-row font-montserrat">
       {/* Left side */}
+      <Helmet>
+        <title>Codiphy :: Signup</title>
+      </Helmet>
       <div className="flex-1 bg-primaryLight flex flex-col justify-center items-center p-8">
         <div className="text-5xl font-bold mb-4 md:text-5xl">Sign Up</div>
         <div className="text-gray mb-4">Create a Codiphy account</div>
@@ -128,7 +132,7 @@ function Signup() {
           onClick={login}
         >
           <FaGithub size={25} className="mr-3" />
-          Continue with github
+          Continue with Github
         </button>
         <div className="flex flex-row justify-center items-center space-x-3 mb-4  ">
           <div className="w-16 h-0.5 bg-gray rounded-xl"></div>

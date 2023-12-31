@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../routes/mainRoutes";
 import { ToastContainer, toast } from "react-toastify";
 import Loading from "../../components/loading";
+import { Helmet } from 'react-helmet';
 import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
@@ -109,6 +110,9 @@ function Login() {
   return (
     <div className="min-h-screen flex flex-col md:flex-row font-montserrat">
       {/* Left side */}
+      <Helmet>
+        <title>Codiphy :: Login</title>
+      </Helmet>
       <div className="flex-1 bg-primaryLight flex flex-col justify-center items-center p-8">
         <div className="text-2xl font-bold mb-4 md:text-5xl">Welcome back!</div>
         <div className="text-gray mb-4">Log in to continue using Codiphy</div>
@@ -117,7 +121,7 @@ function Login() {
           onClick={login}
         >
           <FaGithub size={25} className="mr-3" />
-          Continue with github
+          Continue with Github
         </button>
         <div className="flex flex-row justify-center items-center space-x-3 mb-4">
           <div className="w-16 h-0.5 bg-gray rounded-xl"></div>
