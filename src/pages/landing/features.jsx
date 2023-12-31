@@ -54,14 +54,23 @@ const menuItems = [
 
 function features() {
   return (
-    <section id="feature" className="px-5 py-5 md:px-10 md:py-10 flex flex-col overflow-x-hidden">
+    <section
+      id="feature"
+      className="px-5 py-5 md:px-10 md:py-10 flex flex-col overflow-x-hidden"
+    >
       <h2 className="text-colorAccent mb:mt-3 mb-5 md:text-3xl font-bold">
         Features
       </h2>
       <div className="flex justify-center w-full -z-10">
         <div className="shadow-xl border-1 py-10 rounded-xl md:mt-10 md:mb-10 md:mx-5 p-5 flex flex-col items-center max-w-screen-lg  ">
           <Splide
-            options={{ type: "loop", lazyLoad: "sequential", autoplay: true }}
+            options={{
+              type: "loop",
+              lazyLoad: "sequential",
+              autoplay: true,
+              pagination: false,
+              arrows: false,
+            }}
           >
             {menuItems.map((menu, index) => (
               <SplideSlide key={index}>
@@ -84,7 +93,7 @@ function features() {
             ))}
           </Splide>
         </div>
-      </div>  
+      </div>
     </section>
   );
 }

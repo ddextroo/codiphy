@@ -112,6 +112,7 @@ const Dashboard = ({ open }) => {
                   type: "loop",
                   lazyLoad: "sequential",
                   autoplay: true,
+                  pagination: false,
                 }}
               >
                 {banners.map((menu, index) => (
@@ -170,8 +171,8 @@ const Dashboard = ({ open }) => {
                   <div
                     style={{
                       width: `${
-                        data && data.points <= 1000
-                          ? (data.points / 1000) * 100
+                        data && data.points <= 10000
+                          ? (data.points / 10000) * 100
                           : 100 // set to 100% if points exceed 1000
                       }%`,
                     }}
@@ -179,7 +180,7 @@ const Dashboard = ({ open }) => {
                   ></div>
                 </div>
                 <div className="flex flex-row items-center">
-                  <div className="text-sm text-gray mr-4">1000</div>
+                  <div className="text-sm text-gray mr-4">10000</div>
                 </div>
               </div>
             </div>
