@@ -56,10 +56,20 @@ const Dashboard = ({ open }) => {
     { points: 10, image: badge1, title: "Novice Coder" },
     { points: 50, image: badge2, title: "Code Explorer" },
     { points: 100, image: badge3, title: "Scripting Enthusiast" },
-    { points: 200, image: badge4, title: "Coding Maestro" },
-    { points: 500, image: badge5, title: "Algorithm Ace" },
-    { points: 1000, image: badge6, title: "Programming Prodigy" },
+    { points: 500, image: badge4, title: "Coding Maestro" },
+    { points: 1000, image: badge5, title: "Algorithm Ace" },
+    { points: 10000, image: badge6, title: "Programming Prodigy" },
   ];
+
+  const getBadgeMaxPoints = (points) => {
+    if (points < 10) return 10;
+    if (points < 50) return 50;
+    if (points < 100) return 100;
+    if (points < 500) return 500;
+    if (points < 1000) return 1000;
+    if (points < 10000) return 10000;
+    return points; // Default to current points if exceeding 10000
+  };
 
   const coinPoints = data.points;
 
@@ -171,16 +181,18 @@ const Dashboard = ({ open }) => {
                   <div
                     style={{
                       width: `${
-                        data && data.points <= 10000
-                          ? (data.points / 10000) * 100
-                          : 100 // set to 100% if points exceed 1000
+                        data
+                          ? (data.points / getBadgeMaxPoints(data.points)) * 100
+                          : 0
                       }%`,
                     }}
                     className="absolute h-2 duration-200 bg-green-600 rounded-xl rounded-e-lg animate-pulse"
                   ></div>
                 </div>
                 <div className="flex flex-row items-center">
-                  <div className="text-sm text-gray mr-4">10000</div>
+                  <div className="text-sm text-gray mr-4">
+                    {getBadgeMaxPoints(data ? data.points : 0)}
+                  </div>
                 </div>
               </div>
             </div>
