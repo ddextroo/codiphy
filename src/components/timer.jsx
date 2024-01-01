@@ -15,7 +15,7 @@ function Timer({ duration, onFinish, resetTimer }) {
         clearInterval(intervalId);
         reset();
       }
-    }, 1000);
+    }, 1500);
 
     return () => clearInterval(intervalId);
   }, [secondsRemaining, onFinish, duration, reset]);
@@ -27,7 +27,9 @@ function Timer({ duration, onFinish, resetTimer }) {
   }, [resetTimer, reset]);
 
   return (
-    <div className="text-xl font-bold text-center text-primaryLight2">{secondsRemaining}</div>
+    <div className="text-xl font-bold text-center text-primaryLight2">
+      {secondsRemaining}
+    </div>
   );
 }
 

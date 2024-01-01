@@ -6,7 +6,6 @@ import SyntaxHighlighter from "react-syntax-highlighter";
 import { dark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import loadingQuiz from "./../assets/loadingQuiz.json";
 import { Player } from "@lottiefiles/react-lottie-player";
-import Timer from "./timer";
 import Claim from "../hooks/useClaim";
 
 const BasicQuiz = ({ title, topic, language }) => {
@@ -16,7 +15,7 @@ const BasicQuiz = ({ title, topic, language }) => {
   const [jsonData, setJsonData] = useState(null);
   const [dataFetched, setDataFetched] = useState(false);
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
-  const [resetTimer, setResetTimer] = useState(false);
+  const [secondsRemaining, setSecondsRemaining] = useState(30);
 
   const success = () =>
     toast.success("🎉 Congratulations! Your answer is correct.", {
@@ -30,6 +29,19 @@ const BasicQuiz = ({ title, topic, language }) => {
       theme: "colored",
       toastId: "success",
     });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSecondsRemaining((prevSeconds) => Math.max(0, prevSeconds - 1));
+
+      if (secondsRemaining < 1) {
+        setSecondsRemaining(30);
+        handleNextQuestion();
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [secondsRemaining]);
 
   const [formData, setFormData] = useState({
     answer: "",
@@ -87,6 +99,7 @@ const BasicQuiz = ({ title, topic, language }) => {
     }
 
     setSelectedAnswer(formData.answer);
+    setSecondsRemaining(30);
 
     setTimeout(() => {
       handleNextQuestion();
@@ -99,8 +112,7 @@ const BasicQuiz = ({ title, topic, language }) => {
     const nextQuestion = currentQuestion + 1;
     const length = dataVar.length;
     if (nextQuestion < length) {
-    setResetTimer(true);
-    setCurrentQuestion(nextQuestion);
+      setCurrentQuestion(nextQuestion);
     } else {
       alert(`Quiz completed! Your score: ${score}/${length}`);
       Claim(score, "Advance");
@@ -122,24 +134,13 @@ const BasicQuiz = ({ title, topic, language }) => {
     handleAnswer();
   };
 
-
   return (
     <div className="h-full min-h-screen flex flex-col items-center justify-center space-y-4 mx-10 ">
       <div className="font-bold text-xl md:text-3xl text-primaryLight py-11 flex flex-col gap-y-5">
-        <Timer
-          duration={120}
-          onFinish={handleNextQuestion}
-          resetTimer={resetTimer}
-        />
+        <div>{secondsRemaining}</div>
         {title}
       </div>
-      <div className="font-bold md:text-lg lg:text-xl text-primaryLight select-none">
-        {jsonData && (
-          <p>
-            Question {currentQuestion + 1}/{dataVar.length}
-          </p>
-        )}
-      </div>
+
       <div className="md:text-lg lg:text-xl text-primaryLight py-11">
         {dataVar[currentQuestion]?.question}
       </div>
@@ -179,6 +180,32 @@ const BasicQuiz = ({ title, topic, language }) => {
             Submit
           </button>
         </form>
+        <div className="font-bold md:text-lg lg:text-xl text-primaryLight">
+          {jsonData && (
+            <div className="flex items-center space-x-2 mt-3 justify-center w-full ml-3 duration-300">
+              <div className="text-sm text-primaryLight2">
+                {jsonData ? currentQuestion + 1 : 0}
+              </div>
+              <div className="w-full bg-primaryDark mix-blend-overlay h-2 rounded-xl relative">
+                <div
+                  style={{
+                    width: `${
+                      jsonData
+                        ? ((currentQuestion + 1) / dataVar.length) * 100
+                        : 0
+                    }%`,
+                  }}
+                  className="absolute h-2 duration-200 bg-colorAccent brightness-200 rounded-xl rounded-e-lg"
+                ></div>
+              </div>
+              <div className="flex flex-row items-center">
+                <div className="text-sm text-primaryLight2 mr-4">
+                  {dataVar.length}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
       <div className="w-full flex flex-row justify-end py-5">
         {selectedAnswer !== null && (

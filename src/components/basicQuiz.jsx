@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import loadingQuiz from "./../assets/loadingQuiz.json";
 import { Player } from "@lottiefiles/react-lottie-player";
 import Claim from "../hooks/useClaim";
-import Timer from "./timer";
 import { ToastContainer, toast } from "react-toastify";
 
 const BasicQuiz = ({ title, topic, language }) => {
@@ -12,9 +11,9 @@ const BasicQuiz = ({ title, topic, language }) => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [score, setScore] = useState(0);
   const [jsonData, setJsonData] = useState("");
-  const [resetTimer, setResetTimer] = useState(false);
   const [dataFetched, setDataFetched] = useState(false);
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
+  const [secondsRemaining, setSecondsRemaining] = useState(30);
 
   const { response, loading } = useQuiz({
     topic: topic,
@@ -36,6 +35,19 @@ const BasicQuiz = ({ title, topic, language }) => {
     });
 
   useEffect(() => {
+    const interval = setInterval(() => {
+      setSecondsRemaining((prevSeconds) => Math.max(0, prevSeconds - 1));
+
+      if (secondsRemaining < 1) {
+        setSecondsRemaining(30);
+        handleNextQuestion();
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [secondsRemaining]);
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         if (!dataFetched && !loading && response && response.response) {
@@ -51,7 +63,7 @@ const BasicQuiz = ({ title, topic, language }) => {
     };
 
     fetchData();
-  }, [response]); //
+  }, [response]);
 
   if (loading || !jsonData) {
     return (
@@ -87,6 +99,7 @@ const BasicQuiz = ({ title, topic, language }) => {
     } else {
       setIsAnswerCorrect(false);
     }
+    setSecondsRemaining(30);
     setTimeout(() => {
       handleNextQuestion();
     }, 3000);
@@ -95,14 +108,12 @@ const BasicQuiz = ({ title, topic, language }) => {
   const correctOption = dataVar[currentQuestion]?.answer;
 
   const handleNextQuestion = () => {
-    setIsAnswerCorrect(false); // Reset the correct answer state
+    setIsAnswerCorrect(false);
     setSelectedAnswer(null);
     const nextQuestion = currentQuestion + 1;
 
     const quizLength = dataVar.length;
-
     if (nextQuestion < quizLength) {
-      setResetTimer(true);
       setCurrentQuestion(nextQuestion);
     } else {
       alert(`Quiz completed! Your score: ${score}/${quizLength}`);
@@ -113,20 +124,10 @@ const BasicQuiz = ({ title, topic, language }) => {
   return (
     <div className="h-full min-h-screen flex flex-col items-center justify-center space-y-4 mx-10 ">
       <div className="font-bold text-xl md:text-3xl text-primaryLight py-11 flex flex-col gap-y-5">
-        <Timer
-          duration={30}
-          onFinish={handleNextQuestion}
-          resetTimer={resetTimer}
-        />
+        <div>{secondsRemaining}</div>
         {title}
       </div>
-      <div className="font-bold md:text-lg lg:text-xl text-primaryLight">
-        {jsonData && (
-          <p>
-            Question {currentQuestion + 1}/{dataVar.length}
-          </p>
-        )}
-      </div>
+
       <div className="md:text-lg lg:text-xl text-primaryLight py-11 select-none">
         <div>{dataVar[currentQuestion].question}</div>
       </div>
@@ -156,6 +157,32 @@ const BasicQuiz = ({ title, topic, language }) => {
             </button>
           </li>
         ))}
+        <div className="font-bold md:text-lg lg:text-xl text-primaryLight w-full">
+          {jsonData && (
+            <div className="flex items-center space-x-2 mt-3 justify-center w-full ml-3 duration-300">
+              <div className="text-sm text-primaryLight2">
+                {jsonData ? currentQuestion + 1 : 0}
+              </div>
+              <div className="w-full bg-primaryDark mix-blend-overlay h-2 rounded-xl relative">
+                <div
+                  style={{
+                    width: `${
+                      jsonData
+                        ? ((currentQuestion + 1) / dataVar.length) * 100
+                        : 0
+                    }%`,
+                  }}
+                  className="absolute h-2 duration-200 bg-colorAccent brightness-200 rounded-xl rounded-e-lg"
+                ></div>
+              </div>
+              <div className="flex flex-row items-center">
+                <div className="text-sm text-primaryLight2 mr-4">
+                  {dataVar.length}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       </ul>
 
       <div className="w-full flex flex-row justify-end py-5">
@@ -172,6 +199,7 @@ const BasicQuiz = ({ title, topic, language }) => {
           </button>
         )}
       </div>
+
       {isAnswerCorrect && success() && (
         <ToastContainer
           position="bottom-left"
