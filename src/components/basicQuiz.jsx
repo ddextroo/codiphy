@@ -5,19 +5,35 @@ import loadingQuiz from "./../assets/loadingQuiz.json";
 import { Player } from "@lottiefiles/react-lottie-player";
 import Claim from "../hooks/useClaim";
 import Timer from "./timer";
+import { ToastContainer, toast } from "react-toastify";
 
 const BasicQuiz = ({ title, topic, language }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [score, setScore] = useState(0);
   const [jsonData, setJsonData] = useState("");
+  const [resetTimer, setResetTimer] = useState(false);
   const [dataFetched, setDataFetched] = useState(false);
+  const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
 
   const { response, loading } = useQuiz({
     topic: topic,
     language: language,
     type: "basic",
   });
+
+  const success = () =>
+    toast.success("🎉 Congratulations! Your answer is correct.", {
+      position: "bottom-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      toastId: "success",
+    });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -67,21 +83,26 @@ const BasicQuiz = ({ title, topic, language }) => {
 
     if (selectedOption === correctOption) {
       setScore(score + 1);
+      setIsAnswerCorrect(true);
+    } else {
+      setIsAnswerCorrect(false);
     }
     setTimeout(() => {
       handleNextQuestion();
-    }, 2500);
+    }, 3000);
   };
 
   const correctOption = dataVar[currentQuestion]?.answer;
 
   const handleNextQuestion = () => {
+    setIsAnswerCorrect(false); // Reset the correct answer state
     setSelectedAnswer(null);
     const nextQuestion = currentQuestion + 1;
 
     const quizLength = dataVar.length;
 
     if (nextQuestion < quizLength) {
+      setResetTimer(true);
       setCurrentQuestion(nextQuestion);
     } else {
       alert(`Quiz completed! Your score: ${score}/${quizLength}`);
@@ -92,7 +113,11 @@ const BasicQuiz = ({ title, topic, language }) => {
   return (
     <div className="h-full min-h-screen flex flex-col items-center justify-center space-y-4 mx-10 ">
       <div className="font-bold text-xl md:text-3xl text-primaryLight py-11 flex flex-col gap-y-5">
-        <Timer duration={30} onFinish={handleNextQuestion} />
+        <Timer
+          duration={30}
+          onFinish={handleNextQuestion}
+          resetTimer={resetTimer}
+        />
         {title}
       </div>
       <div className="font-bold md:text-lg lg:text-xl text-primaryLight">
@@ -107,7 +132,14 @@ const BasicQuiz = ({ title, topic, language }) => {
       </div>
 
       <ul className="list-none p-0">
-        {Object.entries(questionChoices).map(([optionKey, optionValue]) => (
+        {Object.entries(
+          questionChoices || {
+            a: dataVar[currentQuestion].a,
+            b: dataVar[currentQuestion].b,
+            c: dataVar[currentQuestion].c,
+            d: dataVar[currentQuestion].d,
+          }
+        ).map(([optionKey, optionValue]) => (
           <li key={optionKey}>
             <button
               onClick={() => handleAnswer(optionKey)}
@@ -140,6 +172,20 @@ const BasicQuiz = ({ title, topic, language }) => {
           </button>
         )}
       </div>
+      {isAnswerCorrect && success() && (
+        <ToastContainer
+          position="bottom-left"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
+      )}
     </div>
   );
 };

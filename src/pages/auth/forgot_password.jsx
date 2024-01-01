@@ -28,6 +28,7 @@ function ForgotPassword() {
       draggable: true,
       progress: undefined,
       theme: "colored",
+      toastId: "success",
     });
   const failed = () =>
     toast.error("😔 Verification failed", {
@@ -39,6 +40,7 @@ function ForgotPassword() {
       draggable: true,
       progress: undefined,
       theme: "colored",
+      toastId: "failed",
     });
   const [email, setEmail] = useState("");
   const navigate = useNavigate();

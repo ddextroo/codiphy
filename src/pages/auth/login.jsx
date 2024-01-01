@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { FaGithub } from "react-icons/fa6";
-// import { Player } from "@lottiefiles/react-lottie-player";
-// import signupAnimate from "./../../assets/login.json";
+import { Player } from "@lottiefiles/react-lottie-player";
+import signupAnimate from "./../../assets/signup.json";
 import { Outlet, Link } from "react-router-dom";
 import { useLogin } from "./../../hooks/useLogin";
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../routes/mainRoutes";
 import { ToastContainer, toast } from "react-toastify";
 import Loading from "../../components/loading";
-import { Helmet } from 'react-helmet';
+import { Helmet } from "react-helmet";
 import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
@@ -32,6 +32,7 @@ function Login() {
       draggable: true,
       progress: undefined,
       theme: "colored",
+      toastId: "success",
     });
   const failed = () =>
     toast.error("😔 Login failed", {
@@ -43,6 +44,7 @@ function Login() {
       draggable: true,
       progress: undefined,
       theme: "colored",
+      toastId: "failed",
     });
 
   const navigate = useNavigate();
@@ -193,12 +195,12 @@ function Login() {
       {/* Right side */}
       <div className="flex-1 hidden bg-gradient-to-b from-colorAccent to-black lg:flex md:items-center md:justify-center">
         <div className="text-center">
-          {/* <Player
+          <Player
             src={signupAnimate}
             className="player w-auto h-auto"
             loop
             autoplay
-          /> */}
+          />
           <div className="mt-10 text-primaryLight text-2xl font-bold mb-2">
             Codiphy
           </div>
@@ -220,7 +222,7 @@ function Login() {
         pauseOnHover
         theme="colored"
       />
-      {showLoading && <Loading/>}
+      {showLoading && <Loading />}
     </div>
   );
 }

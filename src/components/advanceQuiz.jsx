@@ -16,6 +16,7 @@ const BasicQuiz = ({ title, topic, language }) => {
   const [jsonData, setJsonData] = useState(null);
   const [dataFetched, setDataFetched] = useState(false);
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
+  const [resetTimer, setResetTimer] = useState(false);
 
   const success = () =>
     toast.success("🎉 Congratulations! Your answer is correct.", {
@@ -27,6 +28,7 @@ const BasicQuiz = ({ title, topic, language }) => {
       draggable: true,
       progress: undefined,
       theme: "colored",
+      toastId: "success",
     });
 
   const [formData, setFormData] = useState({
@@ -88,7 +90,7 @@ const BasicQuiz = ({ title, topic, language }) => {
 
     setTimeout(() => {
       handleNextQuestion();
-    }, 2500);
+    }, 3000);
   };
 
   const handleNextQuestion = () => {
@@ -97,7 +99,8 @@ const BasicQuiz = ({ title, topic, language }) => {
     const nextQuestion = currentQuestion + 1;
     const length = dataVar.length;
     if (nextQuestion < length) {
-      setCurrentQuestion(nextQuestion);
+    setResetTimer(true);
+    setCurrentQuestion(nextQuestion);
     } else {
       alert(`Quiz completed! Your score: ${score}/${length}`);
       Claim(score, "Advance");
@@ -119,10 +122,15 @@ const BasicQuiz = ({ title, topic, language }) => {
     handleAnswer();
   };
 
+
   return (
     <div className="h-full min-h-screen flex flex-col items-center justify-center space-y-4 mx-10 ">
       <div className="font-bold text-xl md:text-3xl text-primaryLight py-11 flex flex-col gap-y-5">
-        <Timer duration={120} onFinish={handleNextQuestion} />
+        <Timer
+          duration={120}
+          onFinish={handleNextQuestion}
+          resetTimer={resetTimer}
+        />
         {title}
       </div>
       <div className="font-bold md:text-lg lg:text-xl text-primaryLight select-none">

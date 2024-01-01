@@ -37,6 +37,7 @@ function Signup() {
       draggable: true,
       progress: undefined,
       theme: "colored",
+      toastId: "success",
     });
   const failed = () =>
     toast.error("😔 Login failed", {
@@ -48,6 +49,7 @@ function Signup() {
       draggable: true,
       progress: undefined,
       theme: "colored",
+      toastId: "failed",
     });
   const { login } = useLogin();
   const { dispatch } = useContext(AuthContext);

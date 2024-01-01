@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
-function Timer({ duration, onFinish }) {
+function Timer({ duration, onFinish, resetTimer }) {
   const [secondsRemaining, setSecondsRemaining] = useState(duration);
+
+  const reset = useCallback(() => {
+    setSecondsRemaining(duration);
+  }, [duration]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -9,12 +13,18 @@ function Timer({ duration, onFinish }) {
       if (secondsRemaining <= 0) {
         onFinish();
         clearInterval(intervalId);
-        setSecondsRemaining(duration);
+        reset();
       }
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, [secondsRemaining, onFinish, duration]);
+  }, [secondsRemaining, onFinish, duration, reset]);
+
+  useEffect(() => {
+    if (resetTimer) {
+      reset();
+    }
+  }, [resetTimer, reset]);
 
   return (
     <div className="text-xl font-bold text-center text-primaryLight2">{secondsRemaining}</div>
