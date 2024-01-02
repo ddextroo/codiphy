@@ -6,7 +6,7 @@ import SyntaxHighlighter from "react-syntax-highlighter";
 import { dark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import loadingQuiz from "./../assets/loadingQuiz.json";
 import { Player } from "@lottiefiles/react-lottie-player";
-import Claim from "../hooks/useClaim";
+import ResultsQuiz from "../pages/quiz/home/start/resultsQuiz";
 
 const BasicQuiz = ({ title, topic, language }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -114,8 +114,15 @@ const BasicQuiz = ({ title, topic, language }) => {
     if (nextQuestion < length) {
       setCurrentQuestion(nextQuestion);
     } else {
-      alert(`Quiz completed! Your score: ${score}/${length}`);
-      Claim(score, "Advance");
+      return (
+        <ResultsQuiz
+          type={"Basic"}
+          score={score}
+          length={length}
+          topic={topic}
+        />
+      );
+      // alert(`Quiz completed! Your score: ${score}/${length}`);
     }
     setFormData({
       answer: "",

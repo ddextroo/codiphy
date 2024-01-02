@@ -155,7 +155,7 @@ const Dashboard = ({ open }) => {
                   {data.username ? data.username : "user"}
                 </div>
                 <div className="font-medium text-md: lg:text-xl flex flex-row items-center">
-                  <img src={points} className="-ml-2 mr-2 w-10 h-10" />
+                  <img src={points} className="-ml-2 mr-2 w-10 h-10 scale-75" />
                   <div>{data ? data.points : 0}</div>
                 </div>
 

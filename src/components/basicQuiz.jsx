@@ -3,8 +3,8 @@ import useQuiz from "./../hooks/useQuiz";
 import { useState, useEffect } from "react";
 import loadingQuiz from "./../assets/loadingQuiz.json";
 import { Player } from "@lottiefiles/react-lottie-player";
-import Claim from "../hooks/useClaim";
 import { ToastContainer, toast } from "react-toastify";
+import ResultsQuiz from "../pages/quiz/home/start/resultsQuiz";
 
 const BasicQuiz = ({ title, topic, language }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -116,8 +116,15 @@ const BasicQuiz = ({ title, topic, language }) => {
     if (nextQuestion < quizLength) {
       setCurrentQuestion(nextQuestion);
     } else {
-      alert(`Quiz completed! Your score: ${score}/${quizLength}`);
-      Claim(score, "Basic");
+      return (
+        <ResultsQuiz
+          type={"Basic"}
+          score={score}
+          length={length}
+          topic={topic}
+        />
+      );
+      // alert(`Quiz completed! Your score: ${score}/${quizLength}`);
     }
   };
 
