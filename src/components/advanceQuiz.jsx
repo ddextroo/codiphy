@@ -15,7 +15,7 @@ const BasicQuiz = ({ title, topic, language }) => {
   const [jsonData, setJsonData] = useState(null);
   const [dataFetched, setDataFetched] = useState(false);
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
-  const [secondsRemaining, setSecondsRemaining] = useState(30);
+  const [secondsRemaining, setSecondsRemaining] = useState(120);
 
   const success = () =>
     toast.success("🎉 Congratulations! Your answer is correct.", {
@@ -193,7 +193,7 @@ const BasicQuiz = ({ title, topic, language }) => {
               <div className="text-sm text-primaryLight2">
                 {jsonData ? currentQuestion + 1 : 0}
               </div>
-              <div className="w-full bg-primaryDark mix-blend-overlay h-2 rounded-xl relative">
+              <div className="w-full bg-blue-gray-900  h-2 rounded-xl relative">
                 <div
                   style={{
                     width: `${
@@ -202,7 +202,7 @@ const BasicQuiz = ({ title, topic, language }) => {
                         : 0
                     }%`,
                   }}
-                  className="absolute h-2 duration-200 bg-colorAccent brightness-200 rounded-xl rounded-e-lg"
+                  className="absolute h-2 duration-200 bg-colorAccent brightness-100 rounded-xl rounded-e-lg"
                 ></div>
               </div>
               <div className="flex flex-row items-center">
