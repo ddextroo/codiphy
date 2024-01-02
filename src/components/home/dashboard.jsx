@@ -15,12 +15,12 @@ import img5 from "./../../assets/banners/5.png";
 import basic from "./../../assets/svg/basic.svg";
 import advance from "./../../assets/svg/advance.svg";
 
-import badge1 from "./../../assets/badges/badge1.jpg";
-import badge2 from "./../../assets/badges/badge2.jpg";
-import badge3 from "./../../assets/badges/badge3.jpg";
-import badge4 from "./../../assets/badges/badge4.jpg";
-import badge5 from "./../../assets/badges/badge5.jpg";
-import badge6 from "./../../assets/badges/badge6.jpg";
+import badge1 from "./../../assets/badges/badge1.png";
+import badge2 from "./../../assets/badges/badge2.png";
+import badge3 from "./../../assets/badges/badge3.png";
+import badge4 from "./../../assets/badges/badge4.png";
+import badge5 from "./../../assets/badges/badge5.png";
+import badge6 from "./../../assets/badges/badge6.png";
 
 import Dropdown from "./../../components/dropdown";
 import Categories from "./../../model/categories";
@@ -142,13 +142,13 @@ const Dashboard = ({ open }) => {
               <div className="flex flex-col  items-center relative">
                 <img
                   src={selectedBadge.image}
-                  className={`w-[8rem] h-[8rem] lg:w-[9rem] lg:h-[9rem] mix-blend-multiply ${
+                  className={`w-[8rem] h-[8rem] lg:w-[9rem] lg:h-[9rem] mix-blend-multiply scale-150 ${
                     open ? "hidden md:block" : ""
                   }`}
                 />
-                <div className="font-semibold absolute md:text-md lg:text-sm bottom-0 text-primaryDark">
+                {/* <div className="font-semibold absolute md:text-md lg:text-sm bottom-0 text-primaryDark">
                   {selectedBadge.title}
-                </div>
+                </div> */}
               </div>
               <div className="h-40 ml-5  text-primaryDark flex flex-col items-start justify-center space-y-3">
                 <div className="text-2xl md:text-lg lg:text-2xl font-bold">
