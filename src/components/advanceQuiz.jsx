@@ -99,7 +99,7 @@ const BasicQuiz = ({ title, topic, language }) => {
     }
 
     setSelectedAnswer(formData.answer);
-    setSecondsRemaining(30);
+    setSecondsRemaining(120);
 
     setTimeout(() => {
       handleNextQuestion();
