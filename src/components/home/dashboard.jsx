@@ -34,6 +34,7 @@ import { getDoc, doc } from "firebase/firestore";
 const Dashboard = ({ open }) => {
   const { user, authIsReady } = useContext(AuthContext);
   const [data, setData] = useState("");
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
@@ -103,6 +104,19 @@ const Dashboard = ({ open }) => {
     }
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return authIsReady ? (
     <div className="font-montserrat duration-300">
       <Helmet>
@@ -112,7 +126,11 @@ const Dashboard = ({ open }) => {
         <div>
           <div
             style={{
-              gridTemplateColumns: open ? "repeat(2, 1fr)" : "",
+              gridTemplateColumns: open
+                ? isMobile
+                  ? "repeat(1, 1fr)"
+                  : "repeat(2, 1fr)"
+                : "",
             }}
             className={`grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 mt-2 px-10 md:px-20 pt-20 gap-5`}
           >
@@ -142,9 +160,7 @@ const Dashboard = ({ open }) => {
               <div className="flex flex-col  items-center relative">
                 <img
                   src={selectedBadge.image}
-                  className={`w-[8rem] h-[8rem] lg:w-[9rem] lg:h-[9rem] mix-blend-multiply scale-150 ${
-                    open ? "hidden md:block" : ""
-                  }`}
+                  className={`w-[8rem] h-[8rem] lg:w-[9rem] lg:h-[9rem] mix-blend-multiply scale-150`}
                 />
                 {/* <div className="font-semibold absolute md:text-md lg:text-sm bottom-0 text-primaryDark">
                   {selectedBadge.title}
@@ -200,13 +216,15 @@ const Dashboard = ({ open }) => {
               <div className="font-bold text-lg md:text-xl text-primaryDark">
                 Start quiz
               </div>
-              <Dropdown
-                label="Select Language"
-                icon={Categories[selectedLanguage].icon}
-                options={languageOptions}
-                selectedValue={selectedLanguage}
-                onSelect={(value) => setSelectedLanguage(value)}
-              />
+              <div className="w-full z-50">
+                <Dropdown
+                  label="Select Language"
+                  icon={Categories[selectedLanguage].icon}
+                  options={languageOptions}
+                  selectedValue={selectedLanguage}
+                  onSelect={(value) => setSelectedLanguage(value)}
+                />
+              </div>
               <div className="h-2"></div>
               {selectedLanguage && (
                 <Dropdown

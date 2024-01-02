@@ -1,8 +1,9 @@
 import BasicQuiz from "./../../../../components/basicQuiz";
 import AdvanceQuiz from "./../../../../components/advanceQuiz";
 import SelectTopic from "./../../../../components/SelectTopic";
-import { Helmet } from 'react-helmet';
+import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
+import quizBackground from "./../../../../assets/quizBackground.jpg";
 
 function StartQuiz() {
   const location = useLocation();
@@ -15,10 +16,19 @@ function StartQuiz() {
   };
 
   return (
-    <div className="bg-gradient-to-b from-colorAccent to-black font-montserrat h-full min-h-screen">
+    <div
+      className=" font-montserrat h-full min-h-screen"
+      style={{
+        backgroundImage: `url(${quizBackground})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        width: "100%",
+        height: "100%",
+      }}
+    >
       <Helmet>
-          <title>Codiphy :: {getTitle()}</title>
-        </Helmet>
+        <title>Codiphy :: {getTitle()}</title>
+      </Helmet>
       {category === "Basic" && (
         <BasicQuiz title={getTitle()} topic={topic} language={language} />
       )}

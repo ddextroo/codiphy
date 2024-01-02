@@ -20,7 +20,7 @@ const Dropdown = ({ label, options, selectedValue, onSelect, icon }) => {
   };
 
   return (
-    <div className="relative w-full ">
+    <div className="relative w-full">
       <label className="block text-sm font-medium text-gray-700">{label}</label>
       <div className="mt-1 relative">
         <button
