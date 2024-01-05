@@ -16,6 +16,7 @@ const BasicQuiz = ({ title, topic, language }) => {
   const [dataFetched, setDataFetched] = useState(false);
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
   const [secondsRemaining, setSecondsRemaining] = useState(120);
+  const [completed, setCompleted] = useState(false);
 
   const success = () =>
     toast.success("🎉 Congratulations! Your answer is correct.", {
@@ -114,14 +115,7 @@ const BasicQuiz = ({ title, topic, language }) => {
     if (nextQuestion < length) {
       setCurrentQuestion(nextQuestion);
     } else {
-      return (
-        <ResultsQuiz
-          type={"Basic"}
-          score={score}
-          length={length}
-          topic={topic}
-        />
-      );
+      setCompleted(true);
       // alert(`Quiz completed! Your score: ${score}/${length}`);
     }
     setFormData({
@@ -141,7 +135,16 @@ const BasicQuiz = ({ title, topic, language }) => {
     handleAnswer();
   };
 
-  return (
+  return completed ? (
+    <div className="min-h-screen">
+      <ResultsQuiz
+        type={"Advance"}
+        score={score}
+        length={dataVar.length}
+        topic={topic}
+      />
+    </div>
+  ) : (
     <div className="h-full min-h-screen flex flex-col items-center justify-center space-y-4 mx-10 ">
       <div className="font-bold text-xl md:text-3xl text-primaryLight py-11 flex flex-col gap-y-5">
         <div>{secondsRemaining}</div>
