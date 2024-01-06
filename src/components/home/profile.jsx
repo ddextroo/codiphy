@@ -24,7 +24,7 @@ const Profile = () => {
         <div className="flex items-center">
           {/* <div className="w-20 h-20 bg-gray-200 rounded-full mr-4"></div> Profile Photo */}
           <img
-            src={userData.profilePhoto}
+            src={user.photoURL }
             alt="Profile"
             className="w-20 h-20 rounded-full object-cover mr-4 shadow-md border-4 border-primaryLight hover:border-colorAccent transition duration-300"
           />
