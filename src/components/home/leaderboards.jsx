@@ -49,9 +49,7 @@ const Leaderboards = () => {
 
           pointsArray.sort((a, b) => b.points - a.points);
 
-          const top10Points = pointsArray.slice(0, 10);
-
-          setUserPoints(top10Points);
+          setUserPoints(pointsArray);
         }
       });
     };
@@ -64,7 +62,7 @@ const Leaderboards = () => {
         Leaderboards
       </div>
       <div className="flex flex-col lg:flex-row justify-between p-3 gap-y-5 px-5 lg:gap-x-5">
-        <div className="w-full h-auto shadow-xl bg-primaryLight2 rounded-xl">
+        <div className="w-full h-auto shadow-xl bg-primaryLight2 rounded-xl py-5">
           <div className="font-medium mt-5">By points earned</div>
           <div className="flex flex-col overflow-y-auto h-full">
             <div className="grid grid-cols-5 gap-x-5 px-4 place-items-center mt-5 mb-5">
@@ -87,10 +85,14 @@ const Leaderboards = () => {
             {userPoints.map((points, index) => (
               <div
                 key={index}
-                className={`grid grid-cols-5 gap-x-3 place-items-center mx-4 rounded-xl ${points.uid === user.uid ? 'bg-colorAccent' : ""}`}
+                className={`grid grid-cols-5 gap-x-3 place-items-center mx-4 rounded-xl ${
+                  points.uid === user.uid ? "bg-colorAccent" : ""
+                } ${index < 10 ? "block" : points.uid === user.uid ? "bg-colorAccent" : "hidden"}`}
               >
                 <div
-                  className={`font-bold text-primaryDark text-md md:text-xl ${points.uid === user.uid ? 'text-primaryLight' : ""} ${
+                  className={`font-bold text-primaryDark text-md md:text-xl ${
+                    points.uid === user.uid ? "text-primaryLight" : ""
+                  } ${
                     index + 1 == 1
                       ? "text-yellow-800"
                       : index + 1 == 2
@@ -106,7 +108,11 @@ const Leaderboards = () => {
                   src={points.photoUrl ? points.photoUrl : Profile}
                   className={` w-14 h-14 md:w-16 md:h-16`}
                 />
-                <div className={`font-medium text-sm md:text-md ${points.uid === user.uid ? 'text-primaryLight' : ""}`}>
+                <div
+                  className={`font-medium text-sm md:text-md ${
+                    points.uid === user.uid ? "text-primaryLight" : ""
+                  }  ${index < 10 ? "block" : points.uid === user.uid ? "text-primaryLight" : "hidden"}`}
+                >
                   {points.username}
                 </div>
                 <img
@@ -119,14 +125,18 @@ const Leaderboards = () => {
                   }
                   className={` w-14 h-14 md:w-16 md:h-16 scale-150`}
                 />
-                <div className={`font-medium text-sm md:text-md ${points.uid === user.uid ? 'text-primaryLight' : ""}`}>
+                <div
+                  className={`font-medium text-sm md:text-md ${
+                    points.uid === user.uid ? "text-primaryLight" : ""
+                  }  ${index < 10 ? "block" : points.uid === user.uid ? "text-primaryLight" : "hidden"}`}
+                >
                   {points.points}
                 </div>
               </div>
             ))}
           </div>
         </div>
-        <div className="w-full h-auto shadow-xl bg-primaryLight2 rounded-xl">
+        <div className="w-full h-auto shadow-xl bg-primaryLight2 rounded-xl py-5">
           <div className="font-medium mt-5">By Correct Answers</div>
           <div className="flex flex-col overflow-y-auto h-full">
             <div className="grid grid-cols-5 gap-x-5 px-4 place-items-center mt-5 mb-5 ">
@@ -139,17 +149,21 @@ const Leaderboards = () => {
               <div className="font-semibold  text-sm md:text-md text-primaryDark">
                 Username
               </div>
-              <div className="font-semibold text-sm md:text-md text-primaryDark">
+              <div className="font-semibold text-sm md:text-md text-primaryDark whitespace-nowrap">
                 Correct Answers
               </div>
             </div>
             {userPoints.map((points, index) => (
               <div
                 key={index}
-                className={`grid grid-cols-5 gap-x-3 place-items-center mx-4 rounded-xl ${points.uid === user.uid ? 'bg-colorAccent' : ""}`}
+                className={`grid grid-cols-5 gap-x-3 place-items-center mx-4 rounded-xl ${
+                  points.uid === user.uid ? "bg-colorAccent" : ""
+                }  ${index < 10 ? "block" : points.uid === user.uid ? "bg-colorAccent" : "hidden"}`}
               >
                 <div
                   className={`font-bold text-primaryDark text-md md:text-xl ${
+                    points.uid === user.uid ? "text-primaryLight" : ""
+                  } ${
                     index + 1 == 1
                       ? "text-yellow-800"
                       : index + 1 == 2
@@ -165,11 +179,19 @@ const Leaderboards = () => {
                   src={points.photoUrl ? points.photoUrl : Profile}
                   className={` w-14 h-14 md:w-16 md:h-16 `}
                 />
-                <div className={`font-medium text-sm md:text-md ${points.uid === user.uid ? 'text-primaryLight' : ""}`}>
+                <div
+                  className={`font-medium text-sm md:text-md ${
+                    points.uid === user.uid ? "text-primaryLight" : ""
+                  }  ${index < 10 ? "block" : points.uid === user.uid ? "text-primaryLight" : "hidden"}`}
+                >
                   {points.username}
                 </div>
 
-                <div className={`font-medium flex justify-center items-center ${points.uid === user.uid ? 'text-primaryLight' : ""}`}>
+                <div
+                  className={`font-medium flex justify-center items-center ${
+                    points.uid === user.uid ? "text-primaryLight" : ""
+                  }  ${index < 10 ? "block" : points.uid === user.uid ? "text-primaryLight" : "hidden"}`}
+                >
                   <FaCheckCircle size={20} color="green" className="mr-2" />
                   {points.correctAnswers}
                 </div>
