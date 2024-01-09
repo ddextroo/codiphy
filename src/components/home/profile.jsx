@@ -96,10 +96,10 @@ const Profile = () => {
                 </div>
                 <div className="flex flex-col w-full">
                   <div className=" font-medium text-lg text-primaryDark">
-                    User ID: {user.email}
+                    {user.email}
                   </div>
                 </div>
-                <div className="font-medium text-lg text-gray">{user.uid}</div>
+                <div className="font-medium text-lg text-gray">User ID: {user.uid}</div>
               </div>
 
               <button
