@@ -119,6 +119,7 @@ const Dashboard = ({ open }) => {
 
   return authIsReady ? (
     <div className="font-montserrat duration-300">
+          <div className="font-bold text-3xl text-primaryDark mt-10">Dashboard</div>
       <Helmet>
         <title>Codiphy :: Dashboard</title>
       </Helmet>
@@ -132,7 +133,7 @@ const Dashboard = ({ open }) => {
                   : "repeat(2, 1fr)"
                 : "",
             }}
-            className={`grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 mt-2 px-10 md:px-20 pt-20 gap-5`}
+            className={`grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 mt-2 px-10 md:px-20 pt-10 gap-5`}
           >
             <div className="w-full h-56 shadow-xl bg-colorAccent rounded-xl">
               <Splide

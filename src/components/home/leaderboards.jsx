@@ -57,11 +57,11 @@ const Leaderboards = () => {
     fetchData();
   }, []);
   return authIsReady ? (
-    <div className="font-montserrat">
+    <div className="font-montserrat h-auto">
       <div className="font-bold text-3xl text-primaryDark mt-4">
         Leaderboards
       </div>
-      <div className="flex flex-col lg:flex-row justify-between p-3 gap-y-5 px-5 lg:gap-x-5">
+      <div className="flex flex-col lg:flex-row justify-between p-3 gap-y-5 px-5 lg:gap-x-5 h-auto">
         <div className="w-full h-auto shadow-xl bg-primaryLight2 rounded-xl py-5">
           <div className="font-medium mt-5">By points earned</div>
           <div className="flex flex-col overflow-y-auto h-full">
