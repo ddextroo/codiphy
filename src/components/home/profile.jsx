@@ -61,7 +61,7 @@ const Profile = () => {
   const achievements = badges.filter((badge) => data.points >= badge.points);
 
   return authIsReady ? (
-    <div className="bg-primaryLight font-montserrat">
+    <div className="bg-primaryLight font-montserrat p-5">
       {user ? (
         <div className=" flex flex-col justify-center h-auto items-center mt-10">
           <div className="font-bold text-3xl text-primaryDark">Profile</div>
