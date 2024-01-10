@@ -4,7 +4,7 @@ import { db, auth } from "../../firebase/config";
 import { useEffect, useContext, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import { AuthContext } from "../../routes/mainRoutes";
-
+//w
 import badge1 from "./../../assets/badges/badge1.png";
 import badge2 from "./../../assets/badges/badge2.png";
 import badge3 from "./../../assets/badges/badge3.png";

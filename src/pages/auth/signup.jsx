@@ -176,7 +176,7 @@ function Signup() {
               className={`border rounded-lg w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline ${inputBorderStyle(
                 formData.username
               )}`}
-              placeholder="Juan Dela Cruz"
+              placeholder="juandelacruz123"
               value={formData.username}
               onChange={handleChange}
               required
