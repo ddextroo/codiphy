@@ -85,7 +85,7 @@ const Leaderboards = () => {
             {userPoints.map((points, index) => (
               <div
                 key={index}
-                className={`grid grid-cols-5 gap-x-3 place-items-center mx-4 rounded-xl ${
+                className={`grid grid-row-5 sm:grid-cols-5 gap-x-3 place-items-center mx-4 rounded-xl ${
                   points.uid === user.uid ? "bg-colorAccent" : ""
                 } ${index < 10 ? "block" : points.uid === user.uid ? "bg-colorAccent" : "hidden"}`}
               >
@@ -156,7 +156,7 @@ const Leaderboards = () => {
             {userPoints.map((points, index) => (
               <div
                 key={index}
-                className={`grid grid-cols-5 gap-x-3 place-items-center mx-4 rounded-xl ${
+                className={`grid grid-row-5 sm:grid-cols-5 gap-x-3 place-items-center mx-4 rounded-xl ${
                   points.uid === user.uid ? "bg-colorAccent" : ""
                 }  ${index < 10 ? "block" : points.uid === user.uid ? "bg-colorAccent" : "hidden"}`}
               >
