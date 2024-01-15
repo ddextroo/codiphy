@@ -153,6 +153,7 @@ function Signup() {
             <input
               type="text"
               id="displayName"
+              maxLength={30}
               className={`border rounded-lg w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline ${inputBorderStyle(
                 formData.displayName
               )}`}
@@ -173,6 +174,7 @@ function Signup() {
             <input
               type="text"
               id="username"
+              maxLength={30}
               className={`border rounded-lg w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline ${inputBorderStyle(
                 formData.username
               )}`}
