@@ -59,7 +59,7 @@ const BasicQuiz = ({ title, topic, language }) => {
       try {
         if (!dataFetched && !loading && response && response.response) {
           const parsedData = JSON.parse(response.response);
-          console.log(parsedData);
+          // console.log(parsedData);
           setJsonData(parsedData);
           setDataFetched(true);
         }
