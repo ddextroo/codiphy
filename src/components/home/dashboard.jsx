@@ -156,7 +156,7 @@ const Dashboard = ({ open }) => {
               </Splide>
             </div>
             <div
-              className={`w-full lg:w-full h-56 shadow-xl bg-primaryLight2 rounded-xl grid grid-cols-2 place-content-center pr-11`}
+              className={`w-full lg:w-full h-56 shadow-xl bg-primaryLight2 rounded-xl grid grid-cols-2 place-content-center pr-11 lg:pr-4`}
             >
               <div className="flex flex-col  items-center relative">
                 <img
@@ -167,7 +167,7 @@ const Dashboard = ({ open }) => {
                   {selectedBadge.title}
                 </div> */}
               </div>
-              <div className="h-40 ml-5  text-primaryDark flex flex-col items-start justify-center space-y-3">
+              <div className="h-40 ml-5  text-primaryDark flex flex-col items-start justify-center space-y-3 text-left break-all">
                 <div className="text-2xl md:text-lg lg:text-2xl font-bold">
                   {data.username ? data.username : "user"}
                 </div>
