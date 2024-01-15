@@ -116,7 +116,7 @@ const Profile = () => {
               </button>
             </div>
           </div>
-          <div className="flex flex-col items-center w-full text-left first-letter:bg-primaryLight2 shadow-xl m-3">
+          <div className="flex flex-col items-center w-full text-left first-letter:bg-primaryLight2 shadow-xl m-3 rounded-xl bg-primaryLight2">
             <div className="w-full text-primaryDark font-bold text-3xl p-6 rounded-xl">
               Achievement
             </div>
