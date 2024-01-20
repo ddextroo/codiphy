@@ -290,6 +290,6 @@ const Dashboard = ({ open }) => {
     <h1>Making your auth ready, please wait for a moment</h1>
   );
 };
-//weewghghghweewssswwqq
+//weewghghghweewssswwqqwww
 
 export default Dashboard;
