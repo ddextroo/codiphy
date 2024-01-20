@@ -248,5 +248,6 @@ const BasicQuiz = ({ title, topic, language }) => {
     </div>
   );
 };
+//weqq
 
 export default BasicQuiz;
