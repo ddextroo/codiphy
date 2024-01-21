@@ -205,6 +205,6 @@ const Leaderboards = () => {
     <h1>Making your auth ready, please wait for a moment</h1>
   );
 };
-//2@sssjjjhwweewwwwwew@
+//2@sssjjjhwweewwwwwewdsd@
 
 export default Leaderboards;
