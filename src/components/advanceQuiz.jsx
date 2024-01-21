@@ -248,6 +248,6 @@ const BasicQuiz = ({ title, topic, language }) => {
     </div>
   );
 };
-//weqqjh
+//weqqjhwe
 
 export default BasicQuiz;
